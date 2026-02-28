@@ -3,73 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>темный бонус · tma</title>
+    <title>neon bonus · прямая база</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* тёмная тема — базовая (по умолчанию) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #0a0c12;
             --surface: #14181f;
-            --surface-raised: #1e232c;
             --text-primary: #f0f4fa;
             --text-secondary: #9aa8b9;
-            --text-tertiary: #5f6c80;
             --accent: #7c85ff;
             --accent-soft: #2f3545;
-            --accent-glow: #8790ff20;
             --bonus: #6c8cff;
             --success: #2bbf7c;
-            --success-bg: #1a3a30;
-            --warning: #f5b56b;
             --border-dim: #262e3a;
-            --border-subtle: #1f2733;
-            --shadow-depth: 0 12px 30px -10px #00000080;
             --radius-xl: 28px;
             --radius-lg: 22px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
-            --transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        /* светлая тема (переключение, но базовая тёмная) */
-        body.light {
-            --bg: #f2f5f9;
-            --surface: #ffffff;
-            --surface-raised: #f9fcff;
-            --text-primary: #121926;
-            --text-secondary: #3f4a5c;
-            --text-tertiary: #6e7b8c;
-            --accent: #4f46e5;
-            --accent-soft: #eef2ff;
-            --accent-glow: #4f46e510;
-            --bonus: #0a7cff;
-            --success: #0f8b5e;
-            --success-bg: #e0f7ea;
-            --border-dim: #dce3ec;
-            --border-subtle: #e9eef4;
-            --shadow-depth: 0 8px 24px -10px #1e293b30;
-        }
-
         body {
             background-color: var(--bg);
             color: var(--text-primary);
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-weight: 400;
-            line-height: 1.4;
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            transition: background-color 0.2s, color 0.2s;
-            -webkit-font-smoothing: antialiased;
-            padding: 0 0 24px 0;
+            padding: 20px 0 24px;
         }
-
         .app-container {
             width: 100%;
             max-width: 420px;
@@ -79,25 +38,12 @@
             flex-direction: column;
             gap: 18px;
         }
-
-        /* плоские карточки с тонкими границами */
         .card {
             background-color: var(--surface);
             border-radius: var(--radius-xl);
             padding: 24px 20px;
-            border: 1px solid var(--border-subtle);
-            transition: var(--transition);
-            box-shadow: var(--shadow-depth);
-        }
-
-        .card-subtle {
-            background-color: var(--surface-raised);
-            border-radius: var(--radius-lg);
-            padding: 18px 20px;
             border: 1px solid var(--border-dim);
         }
-
-        /* плоские кнопки */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -106,38 +52,16 @@
             background-color: var(--accent-soft);
             color: var(--accent);
             font-weight: 600;
-            font-size: 1rem;
             padding: 14px 22px;
             border-radius: 60px;
-            transition: var(--transition);
+            transition: all 0.2s;
             cursor: pointer;
-            gap: 8px;
-            border: 1px solid transparent;
-            letter-spacing: -0.01em;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: white;
-        }
-
-        .btn-block {
             width: 100%;
-            justify-content: center;
+            gap: 8px;
         }
-
-        .btn:active {
-            transform: scale(0.97);
-            opacity: 0.7;
-        }
-
-        .btn:disabled {
-            opacity: 0.35;
-            pointer-events: none;
-            filter: grayscale(0.4);
-        }
-
-        /* прогресс-бар минимальный */
+        .btn-primary { background-color: var(--accent); color: white; }
+        .btn:active { transform: scale(0.97); opacity: 0.7; }
+        .btn:disabled { opacity: 0.35; pointer-events: none; }
         .progress-bar {
             width: 100%;
             height: 6px;
@@ -146,7 +70,6 @@
             overflow: hidden;
             margin: 14px 0 8px;
         }
-
         .progress-fill {
             height: 100%;
             background-color: var(--accent);
@@ -154,434 +77,392 @@
             border-radius: 12px;
             transition: width 0.3s ease;
         }
-
-        /* типографика */
-        .flex-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .balance-large {
-            font-size: 3rem;
-            font-weight: 500;
-            letter-spacing: -0.03em;
-            line-height: 1;
-            color: var(--text-primary);
-        }
-
+        .balance-large { font-size: 3rem; font-weight: 500; color: var(--text-primary); }
         .badge {
             background-color: var(--accent-soft);
             padding: 4px 14px;
             border-radius: 40px;
             font-size: 0.85rem;
-            font-weight: 500;
             color: var(--accent);
         }
-
-        .badge-success {
-            background-color: var(--success-bg);
-            color: var(--success);
-        }
-
-        .badge-dim {
-            background-color: var(--border-dim);
-            color: var(--text-secondary);
-        }
-
-        .hint-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 400;
-        }
-
-        .small-mono {
-            font-size: 0.9rem;
-            color: var(--text-tertiary);
-            font-weight: 450;
-        }
-
-        /* плавное появление цифр */
+        .hint-text { color: var(--text-secondary); font-size: 0.9rem; }
+        .flex-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .hidden { display: none !important; }
         @keyframes gentlePop {
             0% { opacity: 0.3; transform: translateY(5px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-balance {
-            animation: gentlePop 0.25s ease-out forwards;
-        }
-
-        /* экран подписки (оверлей) */
-        .subscription-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--bg);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(4px);
-        }
-
-        .sub-card {
-            background: var(--surface);
-            border-radius: var(--radius-xl);
-            padding: 36px 26px;
-            text-align: center;
-            max-width: 360px;
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-depth);
-        }
-
-        .channel-badge-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin: 24px 0 12px;
-        }
-        .channel-badge {
-            background: var(--accent-soft);
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border-dim);
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid var(--border-dim);
-            margin: 18px 0;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* переключатель темы (микро) */
-        .theme-toggle {
-            background: var(--surface-raised);
-            border: 1px solid var(--border-dim);
-            border-radius: 40px;
-            padding: 8px 14px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .theme-toggle:active { opacity: 0.6; }
-
-        /* история плоскими строками */
-        .history-item {
-            background-color: var(--surface-raised);
-            border-radius: var(--radius-md);
-            padding: 12px 16px;
-            border: 1px solid var(--border-dim);
-            transition: var(--transition);
-        }
+        .animate-balance { animation: gentlePop 0.25s ease-out forwards; }
     </style>
 </head>
-<body class="dark"> <!-- тёмная тема базово (dark класс) -->
-    <!-- ЭКРАН ПОДПИСКИ (виден изначально) -->
-    <div id="subscriptionScreen" class="subscription-overlay">
-        <div class="sub-card">
-            <span style="font-size: 44px; margin-bottom: 8px; display: block;">🔒</span>
-            <h2 style="font-weight: 500; margin-bottom: 10px; color: var(--text-primary);">нужна подписка</h2>
-            <p class="hint-text" style="margin-bottom: 26px;">оформи подписку на каналы, чтобы войти</p>
-            
-            <div class="channel-badge-list">
-                <span class="channel-badge">@bonus_wave</span>
-                <span class="channel-badge">@daily_offers</span>
-                <span class="channel-badge">@crypto_pulse</span>
+<body>
+    <div id="mainApp" class="app-container">
+        <!-- Шапка -->
+        <div class="card">
+            <div class="flex-row">
+                <span class="badge">💰 баланс</span>
+                <span class="hint-text" id="userId"></span>
             </div>
-
-            <!-- плоская кнопка "подписаться" (имитация) -->
-            <button class="btn btn-primary btn-block" id="fakeSubscribeBtn" style="margin-top: 18px;">
-                ✅ я подписался
-            </button>
-            <p class="hint-text" style="margin-top: 18px; font-size: 0.75rem;">* после проверки бэкендом интерфейс разблокируется</p>
-        </div>
-    </div>
-
-    <!-- ОСНОВНОЙ ИНТЕРФЕЙС (скрыт до подписки) -->
-    <div id="mainApp" class="app-container hidden">
-
-        <!-- шапка: баланс + переключатель темы -->
-        <div class="flex-row">
-            <div>
-                <span class="badge badge-dim">💰 твой счёт</span>
-            </div>
-            <button class="theme-toggle" id="themeSwitch">🌞 светлая</button>
-        </div>
-
-        <!-- карточка баланса (крупно) -->
-        <div class="card" style="padding: 24px 22px;">
-            <div class="flex-row" style="margin-bottom: 2px;">
+            <div style="margin-top: 16px;">
                 <span class="balance-large" id="balanceDisplay">0</span>
-                <span style="font-size: 1.5rem; color: var(--text-tertiary);">₽</span>
-            </div>
-            <div class="flex-row hint-text">
-                <span>доступно для вывода</span>
-                <span id="minWithdrawHint" class="small-mono">мин 50 ₽</span>
+                <span style="font-size: 1.5rem; color: var(--text-secondary);">₽</span>
             </div>
         </div>
 
-        <!-- кнопка бонуса (реклама) — плоская, яркая -->
-        <button class="btn btn-block" id="bonusBtn" style="background: var(--bonus); color: white; padding: 18px; font-size: 1.2rem;">
-            <span>✨</span> получить бонус (1–100 ₽)
+        <!-- Кнопка бонуса -->
+        <button class="btn" id="bonusBtn" style="background: var(--bonus); color: white; padding: 18px;">
+            ✨ получить бонус (1–100 ₽)
         </button>
 
-        <!-- блок рефералов и вывода -->
-        <div class="card" style="padding: 24px 20px;">
-            <!-- реферальная часть -->
-            <div class="flex-row" style="margin-bottom: 14px;">
+        <!-- Реферальная система -->
+        <div class="card">
+            <div class="flex-row" style="margin-bottom: 16px;">
                 <span style="font-weight: 600;">👥 рефералы</span>
-                <span class="badge" id="referralCountDisplay">0 / 3</span>
+                <span class="badge" id="referralCount">0/3</span>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="referralProgress" style="width: 0%;"></div>
             </div>
-            <div class="flex-row hint-text" style="margin-top: 6px;">
-                <span>активные друзья (подписка+бонус)</span>
-                <span id="referralStatus">не выполнено</span>
-            </div>
-
-            <hr>
-
-            <!-- реферальная ссылка + копия -->
-            <div class="flex-row" style="margin-bottom: 10px;">
-                <span style="font-weight: 500;">🔗 твоя ссылка</span>
-                <button class="btn" id="copyRefLink" style="padding: 8px 16px; font-size: 0.8rem;">копировать</button>
-            </div>
-            <div class="card-subtle" style="word-break: break-all; font-size: 0.8rem; color: var(--text-secondary);">
-                <span id="refLink">https://t.me/mini_bot?start=ref_uLyX7</span>
-            </div>
-
-            <!-- прогресс вывода -->
-            <div style="margin-top: 24px;">
+            <div style="margin-top: 20px;">
                 <div class="flex-row" style="margin-bottom: 8px;">
-                    <span style="font-weight: 600;">💸 вывод средств</span>
-                    <span class="badge" id="withdrawStatusBadge">⛔ недоступен</span>
+                    <span>твоя ссылка</span>
+                    <button class="btn" id="copyRefLink" style="padding: 6px 12px; width: auto;">копировать</button>
                 </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="withdrawProgressFill" style="width: 0%;"></div>
-                </div>
-                <div class="flex-row hint-text" style="margin-top: 8px;">
-                    <span>рефералы: <span id="withdrawProgressText">0/3</span></span>
-                    <span>баланс: <span id="balanceConditionIcon">❌</span> ≥50₽</span>
-                </div>
-
-                <!-- кнопка вывода -->
-                <button class="btn btn-block" id="withdrawBtn" disabled style="margin-top: 24px;">
-                    📤 вывести
-                </button>
-            </div>
-        </div>
-
-        <!-- история начислений (аккуратные записи) -->
-        <div class="card" style="padding: 20px;">
-            <span style="font-weight: 600; margin-bottom: 16px; display: block;">📋 история операций</span>
-            <div id="historyList" style="display: flex; flex-direction: column; gap: 10px;">
-                <!-- динамические элементы через JS -->
-                <div class="history-item flex-row">
-                    <span class="hint-text">➕ бонус за рекламу</span>
-                    <span style="color: var(--success);">+15 ₽</span>
-                </div>
-                <div class="history-item flex-row">
-                    <span class="hint-text">➕ бонус</span>
-                    <span style="color: var(--success);">+42 ₽</span>
+                <div class="card" style="background: #1e232c; padding: 12px; word-break: break-all;">
+                    <span id="refLink" class="hint-text">загрузка...</span>
                 </div>
             </div>
         </div>
-        <!-- деликатный футер -->
-        <div class="flex-row hint-text" style="justify-content: center; margin-top: 4px;">
-            <span>minimal app · flat · dark</span>
+
+        <!-- Вывод -->
+        <div class="card">
+            <div class="flex-row" style="margin-bottom: 16px;">
+                <span style="font-weight: 600;">💸 вывод</span>
+                <span class="badge" id="withdrawStatus">⛔ недоступен</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="withdrawProgress" style="width: 0%;"></div>
+            </div>
+            <div class="flex-row" style="margin: 12px 0;">
+                <span class="hint-text">нужно рефералов: <span id="referralNeeded">0/3</span></span>
+                <span class="hint-text">баланс ≥50₽: <span id="balanceCondition">❌</span></span>
+            </div>
+            <button class="btn" id="withdrawBtn" disabled>📤 вывести</button>
+        </div>
+
+        <!-- История -->
+        <div class="card">
+            <span style="font-weight: 600; margin-bottom: 16px; display: block;">📋 история</span>
+            <div id="historyList"></div>
         </div>
     </div>
 
     <script>
-        (function() {
-            // --- СОСТОЯНИЕ ПРИЛОЖЕНИЯ (имитация данных) ---
-            let balance = 34;           // стартовый баланс (чуть меньше 50 для наглядности)
-            let referrals = 1;           // кол-во активных друзей
-            const requiredReferrals = 3;
-            const minWithdraw = 50;
+        // ==============================================
+        // НАСТРОЙКА ПОДКЛЮЧЕНИЯ К NEON
+        // ==============================================
+        const NEON_CONFIG = {
+    host: 'ep-sparkling-forest-aic1svb9-pooler.c-4.us-east-1.aws.neon.tech',
+    database: 'neondb',
+    user: 'neondb_owner',
+    password: 'npg_GrJdL7gwel2H',
+    ssl: true
+};
 
-            let history = [
-                { type: 'bonus', amount: 15 },
-                { type: 'bonus', amount: 42 },
-            ];
+        // Базовая функция для запросов к Neon HTTP API
+        async function queryNeon(sql, params = []) {
+            const url = `https://${NEON_CONFIG.host}/sql`;
+            
+            // Базовая аутентификация
+            const auth = btoa(`${NEON_CONFIG.user}:${NEON_CONFIG.password}`);
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Basic ${auth}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: sql,
+                        params: params
+                    })
+                });
 
-            // подписка (имитация)
-            let isSubscribed = false;
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(`SQL Error: ${error}`);
+                }
 
-            // --- DOM элементы ---
-            const subscriptionScreen = document.getElementById('subscriptionScreen');
-            const mainApp = document.getElementById('mainApp');
-            const subscribeBtn = document.getElementById('fakeSubscribeBtn');
-            const balanceSpan = document.getElementById('balanceDisplay');
-            const bonusBtn = document.getElementById('bonusBtn');
-            const referralCountSpan = document.getElementById('referralCountDisplay');
-            const referralProgress = document.getElementById('referralProgress');
-            const referralStatus = document.getElementById('referralStatus');
+                return await response.json();
+            } catch (error) {
+                console.error('Database error:', error);
+                throw error;
+            }
+        }
+
+        // ==============================================
+        // ИНИЦИАЛИЗАЦИЯ ТАБЛИЦ (выполнить 1 раз)
+        // ==============================================
+        async function initDatabase() {
+            try {
+                // Создаём таблицу пользователей
+                await queryNeon(`
+                    CREATE TABLE IF NOT EXISTS users (
+                        id BIGSERIAL PRIMARY KEY,
+                        telegram_id BIGINT UNIQUE NOT NULL,
+                        balance INTEGER DEFAULT 0,
+                        referral_code VARCHAR(50) UNIQUE,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                `);
+
+                // Таблица рефералов
+                await queryNeon(`
+                    CREATE TABLE IF NOT EXISTS referrals (
+                        id BIGSERIAL PRIMARY KEY,
+                        referrer_id BIGINT NOT NULL,
+                        referred_id BIGINT NOT NULL,
+                        bonus_received BOOLEAN DEFAULT FALSE,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                `);
+
+                // Таблица истории
+                await queryNeon(`
+                    CREATE TABLE IF NOT EXISTS history (
+                        id BIGSERIAL PRIMARY KEY,
+                        user_id BIGINT NOT NULL,
+                        amount INTEGER NOT NULL,
+                        type VARCHAR(20) NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                `);
+
+                console.log('✅ База данных инициализирована');
+            } catch (error) {
+                console.error('❌ Ошибка инициализации:', error);
+            }
+        }
+
+        // ==============================================
+        // РАБОТА С ДАННЫМИ
+        // ==============================================
+        const TELEGRAM_ID = 123456; // Замените на реальный ID из Telegram
+
+        async function loadUserData() {
+            try {
+                // Получаем или создаём пользователя
+                let user = await queryNeon(
+                    'SELECT * FROM users WHERE telegram_id = $1',
+                    [TELEGRAM_ID]
+                );
+
+                if (user.length === 0) {
+                    // Создаём нового пользователя
+                    const referralCode = `ref_${Math.random().toString(36).substr(2, 9)}`;
+                    await queryNeon(
+                        'INSERT INTO users (telegram_id, balance, referral_code) VALUES ($1, $2, $3)',
+                        [TELEGRAM_ID, 34, referralCode]
+                    );
+                    user = [{ balance: 34, referral_code: referralCode }];
+                }
+
+                // Получаем количество рефералов
+                const referrals = await queryNeon(
+                    'SELECT COUNT(*) as count FROM referrals WHERE referrer_id = $1 AND bonus_received = true',
+                    [TELEGRAM_ID]
+                );
+
+                // Получаем историю
+                const history = await queryNeon(
+                    'SELECT * FROM history WHERE user_id = $1 ORDER BY created_at DESC LIMIT 5',
+                    [TELEGRAM_ID]
+                );
+
+                return {
+                    balance: user[0].balance,
+                    referralCode: user[0].referral_code,
+                    referralsCount: referrals[0]?.count || 0,
+                    history: history || []
+                };
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                // Возвращаем тестовые данные если база ещё не настроена
+                return {
+                    balance: 34,
+                    referralCode: 'ref_test123',
+                    referralsCount: 1,
+                    history: [
+                        { type: 'bonus', amount: 15 },
+                        { type: 'bonus', amount: 42 }
+                    ]
+                };
+            }
+        }
+
+        async function addBonus(userId, amount) {
+            // Обновляем баланс
+            await queryNeon(
+                'UPDATE users SET balance = balance + $1 WHERE telegram_id = $2',
+                [amount, userId]
+            );
+            
+            // Добавляем в историю
+            await queryNeon(
+                'INSERT INTO history (user_id, amount, type) VALUES ($1, $2, $3)',
+                [userId, amount, 'bonus']
+            );
+        }
+
+        // ==============================================
+        // СОСТОЯНИЕ ПРИЛОЖЕНИЯ
+        // ==============================================
+        let appState = {
+            balance: 0,
+            referrals: 0,
+            referralCode: '',
+            history: []
+        };
+
+        // Функция обновления UI
+        function updateUI() {
+            document.getElementById('balanceDisplay').textContent = appState.balance;
+            document.getElementById('balanceDisplay').classList.add('animate-balance');
+            setTimeout(() => document.getElementById('balanceDisplay').classList.remove('animate-balance'), 250);
+            
+            const referralPercent = (appState.referrals / 3) * 100;
+            document.getElementById('referralProgress').style.width = `${Math.min(referralPercent, 100)}%`;
+            document.getElementById('referralCount').textContent = `${appState.referrals}/3`;
+            
+            document.getElementById('refLink').textContent = `https://t.me/ваш_бот?start=${appState.referralCode}`;
+            
+            const balanceOk = appState.balance >= 50;
+            const referralsOk = appState.referrals >= 3;
+            const canWithdraw = balanceOk && referralsOk;
+            
+            document.getElementById('referralNeeded').textContent = `${appState.referrals}/3`;
+            document.getElementById('balanceCondition').textContent = balanceOk ? '✅' : '❌';
+            
+            let conditionsMet = 0;
+            if (balanceOk) conditionsMet++;
+            if (referralsOk) conditionsMet++;
+            document.getElementById('withdrawProgress').style.width = `${(conditionsMet / 2) * 100}%`;
+            
             const withdrawBtn = document.getElementById('withdrawBtn');
-            const withdrawStatusBadge = document.getElementById('withdrawStatusBadge');
-            const withdrawProgressFill = document.getElementById('withdrawProgressFill');
-            const withdrawProgressText = document.getElementById('withdrawProgressText');
-            const balanceConditionIcon = document.getElementById('balanceConditionIcon');
-            const historyDiv = document.getElementById('historyList');
-            const themeSwitch = document.getElementById('themeSwitch');
-            const copyRefBtn = document.getElementById('copyRefLink');
-            const refLinkSpan = document.getElementById('refLink');
+            if (canWithdraw) {
+                withdrawBtn.disabled = false;
+                withdrawBtn.style.background = 'var(--success)';
+                document.getElementById('withdrawStatus').textContent = '✅ доступен';
+            } else {
+                withdrawBtn.disabled = true;
+                withdrawBtn.style.background = 'var(--accent-soft)';
+                document.getElementById('withdrawStatus').textContent = '⛔ недоступен';
+            }
+            
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            if (appState.history.length === 0) {
+                historyList.innerHTML = '<div class="hint-text">пока нет операций</div>';
+            } else {
+                appState.history.slice(0, 5).forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'card';
+                    div.style.padding = '12px';
+                    div.style.marginBottom = '8px';
+                    div.style.display = 'flex';
+                    div.style.justifyContent = 'space-between';
+                    
+                    if (item.type === 'bonus') {
+                        div.innerHTML = `<span class="hint-text">➕ бонус</span>
+                                        <span style="color: var(--success);">+${item.amount} ₽</span>`;
+                    } else {
+                        div.innerHTML = `<span class="hint-text">📤 вывод</span>
+                                        <span style="color: var(--text-secondary);">-${item.amount} ₽</span>`;
+                    }
+                    historyList.appendChild(div);
+                });
+            }
+        }
 
-            // --- вспомогательная функция обновления UI (централизованно) ---
-            function refreshUI() {
-                // баланс с анимацией
-                balanceSpan.textContent = balance;
-                balanceSpan.classList.add('animate-balance');
-                setTimeout(() => balanceSpan.classList.remove('animate-balance'), 250);
+        // ==============================================
+        // ОБРАБОТЧИКИ
+        // ==============================================
+        document.getElementById('bonusBtn').addEventListener('click', async () => {
+            const bonusAmount = Math.floor(Math.random() * 100) + 1;
+            
+            try {
+                // Сохраняем в базу
+                await addBonus(TELEGRAM_ID, bonusAmount);
+                
+                // Обновляем локальное состояние
+                appState.balance += bonusAmount;
+                appState.history.unshift({ type: 'bonus', amount: bonusAmount });
+                if (appState.history.length > 5) appState.history.pop();
+                
+                updateUI();
+            } catch (error) {
+                console.error('Ошибка:', error);
+                // Если база не работает, просто имитируем
+                appState.balance += bonusAmount;
+                appState.history.unshift({ type: 'bonus', amount: bonusAmount });
+                updateUI();
+            }
+        });
 
-                // реферальный прогресс
-                const referralPercent = (referrals / requiredReferrals) * 100;
-                referralProgress.style.width = `${Math.min(referralPercent, 100)}%`;
-                referralCountSpan.textContent = `${referrals} / ${requiredReferrals}`;
-                referralStatus.textContent = referrals >= requiredReferrals ? '✅ готово' : `👥 ${referrals}/${requiredReferrals}`;
-                referralStatus.style.color = referrals >= requiredReferrals ? 'var(--success)' : 'var(--text-secondary)';
-
-                // условия вывода
-                const balanceOk = balance >= minWithdraw;
-                const referralsOk = referrals >= requiredReferrals;
-                const canWithdraw = balanceOk && referralsOk;
-
-                // прогресс-бар вывода (два условия: 50% баланс, 50% рефералы)
-                let conditionsMet = 0;
-                if (balanceOk) conditionsMet++;
-                if (referralsOk) conditionsMet++;
-                const withdrawPercent = (conditionsMet / 2) * 100;
-                withdrawProgressFill.style.width = `${withdrawPercent}%`;
-                withdrawProgressText.textContent = `${referrals}/${requiredReferrals}`;
-                balanceConditionIcon.textContent = balanceOk ? '✅' : '❌';
-
-                if (canWithdraw) {
-                    withdrawBtn.disabled = false;
-                    withdrawBtn.style.background = 'var(--success)';
-                    withdrawBtn.style.color = 'white';
-                    withdrawStatusBadge.textContent = '✅ можно вывести';
-                    withdrawStatusBadge.classList.add('badge-success');
-                } else {
-                    withdrawBtn.disabled = true;
-                    withdrawBtn.style.background = 'var(--accent-soft)';
-                    withdrawBtn.style.color = 'var(--text-tertiary)';
-                    withdrawStatusBadge.textContent = '⛔ недоступен';
-                    withdrawStatusBadge.classList.remove('badge-success');
-                }
-
-                // отрисовка истории (последние 4)
-                historyDiv.innerHTML = '';
-                const lastItems = history.slice(-4).reverse();
-                if (lastItems.length === 0) {
-                    historyDiv.innerHTML = '<div class="history-item hint-text">пусто</div>';
-                } else {
-                    lastItems.forEach(item => {
-                        const row = document.createElement('div');
-                        row.className = 'history-item flex-row';
-                        if (item.type === 'bonus') {
-                            row.innerHTML = `<span class="hint-text">➕ бонус за рекламу</span><span style="color: var(--success);">+${item.amount} ₽</span>`;
-                        } else if (item.type === 'withdraw') {
-                            row.innerHTML = `<span class="hint-text">📤 вывод</span><span style="color: var(--text-tertiary);">-${item.amount} ₽</span>`;
-                        } else {
-                            row.innerHTML = `<span class="hint-text">${item.type}</span><span>${item.amount} ₽</span>`;
-                        }
-                        historyDiv.appendChild(row);
-                    });
+        document.getElementById('withdrawBtn').addEventListener('click', async () => {
+            if (appState.balance >= 50 && appState.referrals >= 3) {
+                try {
+                    await queryNeon(
+                        'UPDATE users SET balance = 0 WHERE telegram_id = $1',
+                        [TELEGRAM_ID]
+                    );
+                    await queryNeon(
+                        'INSERT INTO history (user_id, amount, type) VALUES ($1, $2, $3)',
+                        [TELEGRAM_ID, appState.balance, 'withdraw']
+                    );
+                    
+                    appState.history.unshift({ type: 'withdraw', amount: appState.balance });
+                    appState.balance = 0;
+                    updateUI();
+                    alert('Заявка на вывод создана');
+                } catch (error) {
+                    console.error('Ошибка:', error);
                 }
             }
+        });
 
-            // добавить запись истории
-            function addHistory(type, amount) {
-                history.push({ type, amount });
-                if (history.length > 6) history.shift();
-                refreshUI();
+        document.getElementById('copyRefLink').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('refLink').textContent);
+            alert('✅ Ссылка скопирована');
+        });
+
+        // Для теста: двойной клик на счётчике рефералов
+        document.getElementById('referralCount').addEventListener('dblclick', () => {
+            if (appState.referrals < 3) {
+                appState.referrals++;
+                updateUI();
             }
+        });
 
-            // --- обработчик подписки ---
-            subscribeBtn.addEventListener('click', () => {
-                // здесь должен быть запрос к бэкенду на проверку подписок
-                isSubscribed = true;
-                subscriptionScreen.classList.add('hidden');
-                mainApp.classList.remove('hidden');
-                refreshUI();
-            });
-
-            // --- бонус за просмотр рекламы ---
-            bonusBtn.addEventListener('click', () => {
-                // здесь: вызов рекламного SDK / оффера. после успеха:
-                const bonus = Math.floor(Math.random() * 100) + 1; // 1-100
-                balance += bonus;
-                addHistory('bonus', bonus);
-            });
-
-            // --- реферальная система (тест: двойной клик на счётчике увеличивает) ---
-            referralCountSpan.addEventListener('dblclick', (e) => {
-                if (referrals < requiredReferrals) {
-                    referrals++;
-                    refreshUI();
-                }
-            });
-            // alt+клик на статус сброс (для теста)
-            referralStatus.addEventListener('click', (e) => {
-                if (e.altKey) {
-                    referrals = 0;
-                    refreshUI();
-                }
-            });
-
-            // копирование ссылки (имитация)
-            copyRefBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(refLinkSpan.textContent);
-                // здесь бэкенд может фиксировать переходы
-                alert('✅ реферальная ссылка скопирована');
-            });
-
-            // --- вывод средств ---
-            withdrawBtn.addEventListener('click', () => {
-                if (withdrawBtn.disabled) return;
-                if (balance >= minWithdraw && referrals >= requiredReferrals) {
-                    const withdrawAmount = balance; // выводим всё
-                    balance = 0;
-                    addHistory('withdraw', withdrawAmount);
-                    refreshUI();
-                }
-            });
-
-            // --- переключение темы (тёмная базовая, светлая как опция) ---
-            themeSwitch.addEventListener('click', () => {
-                document.body.classList.toggle('light');
-                themeSwitch.textContent = document.body.classList.contains('light') ? '🌙 тёмная' : '🌞 светлая';
-            });
-
-            // стартовое обновление
-            refreshUI();
-
-            // для удобства разработки можно закомментировать экран подписки:
-            // subscriptionScreen.classList.add('hidden');
-            // mainApp.classList.remove('hidden');
+        // ==============================================
+        // ЗАПУСК
+        // ==============================================
+        (async function init() {
+            // Сначала инициализируем базу
+            await initDatabase();
+            
+            // Загружаем данные пользователя
+            const userData = await loadUserData();
+            appState = {
+                balance: userData.balance,
+                referrals: userData.referralsCount,
+                referralCode: userData.referralCode,
+                history: userData.history
+            };
+            
+            updateUI();
         })();
     </script>
-
-    <!-- 
-        ========== BACKEND-ИНТЕГРАЦИЯ ==========
-        • Подписки: заменить `fakeSubscribeBtn` на реальную проверку через Telegram Web App (или бэкенд).
-        • Бонус: после успешного просмотра рекламы отправлять запрос на `https://api.example.com/bonus/claim` 
-          и получать актуальный баланс.
-        • Рефералы: уникальная ссылка должна формироваться динамически. При активации друга (подписка + получение бонуса) 
-          увеличивать счетчик.
-        • Вывод: при клике отправлять запрос на создание выплаты, баланс списывать после подтверждения.
-        • История: загружать с сервера при открытии приложения.
-        • Тема: можно синхронизировать с Telegram.WebApp.colorScheme.
-    -->
 </body>
-    </html>
+</html>
