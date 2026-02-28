@@ -3,236 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>QuesTask — Minimal White</title>
+    <title>QuesTask — Вопросы</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: #f5f5f7;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
+            padding: 16px;
         }
 
         .app {
             max-width: 400px;
             width: 100%;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
             position: relative;
-            min-height: 100vh;
+            min-height: 700px;
             display: flex;
             flex-direction: column;
-            color: #1d1d1f;
-            box-shadow: 0 0 1px rgba(0,0,0,0.05);
+            color: #1a1a2e;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* Header */
+        /* Decorative elements */
+        .app::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Header with gradient */
         .header {
-            padding: 24px 20px 12px;
-            background: #ffffff;
+            padding: 30px 24px 20px;
+            background: linear-gradient(145deg, #ffffff, #f8f9ff);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 500;
-            letter-spacing: -0.3px;
-            color: #1d1d1f;
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
         .logo span {
-            font-weight: 300;
-            color: #86868b;
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Balance Card */
+        /* Balance Card with glass effect */
         .balance {
-            margin: 8px 20px 20px;
-            background: #f5f5f7;
-            border-radius: 24px;
-            padding: 22px;
-            color: #1d1d1f;
+            margin: 0 24px 24px;
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            border-radius: 30px;
+            padding: 24px;
+            color: white;
+            box-shadow: 0 15px 30px -10px rgba(102, 126, 234, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .balance-label {
-            font-size: 14px;
-            color: #86868b;
-            margin-bottom: 6px;
-            font-weight: 400;
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .balance-amount {
-            font-size: 36px;
-            font-weight: 500;
-            letter-spacing: -0.5px;
-            margin-bottom: 18px;
-            color: #1d1d1f;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
         }
 
-        .balance-stats {
-            display: flex;
-            gap: 28px;
+        .balance-hint {
+            font-size: 14px;
+            opacity: 0.8;
         }
 
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-value {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1d1d1f;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: #86868b;
-            margin-top: 2px;
-            font-weight: 400;
+        .balance-hint span {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 30px;
+            display: inline-block;
         }
 
         /* Main Content */
         .content {
             flex: 1;
-            padding: 0 20px 90px;
+            padding: 0 24px 100px;
             overflow-y: auto;
         }
 
         /* Section Headers */
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1d1d1f;
-        }
-
-        .section-link {
-            color: #86868b;
-            font-size: 14px;
-            text-decoration: none;
-            font-weight: 400;
-        }
-
-        /* Poll Card */
-        .poll-card {
-            background: #f5f5f7;
-            border-radius: 24px;
-            overflow: hidden;
             margin-bottom: 20px;
         }
 
-        .poll-content {
-            padding: 24px;
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a1a2e, #4a4a6a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
         }
 
-        .poll-category {
-            font-size: 13px;
+        .section-subtitle {
+            color: #666;
+            font-size: 15px;
             font-weight: 400;
-            color: #86868b;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
+        }
+
+        /* Questions Section - Main Screen */
+        .questions-hero {
+            background: linear-gradient(145deg, #f8f9ff, #ffffff);
+            border-radius: 40px;
+            padding: 40px 24px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 15px 30px -15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .hero-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 48px;
+            border: 2px solid #667eea40;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a1a2e;
             margin-bottom: 12px;
         }
 
-        .poll-question {
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 1.4;
-            color: #1d1d1f;
-            margin-bottom: 24px;
+        .hero-text {
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            font-size: 16px;
         }
 
-        .poll-options {
+        .start-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 60px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            box-shadow: 0 15px 30px -10px #667eea;
+            letter-spacing: 0.5px;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px -10px #667eea;
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+        }
+
+        .info-badge {
+            margin-top: 20px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .info-badge span {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -15px rgba(102, 126, 234, 0.3);
+            border: 1px solid #667eea20;
+        }
+
+        .question-header {
+            padding: 30px 24px 20px;
+            background: linear-gradient(145deg, #f8f9ff, #ffffff);
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a2e;
+            line-height: 1.4;
+        }
+
+        .question-reward {
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            padding: 15px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #667eea20;
+        }
+
+        .reward-coin {
+            font-size: 24px;
+        }
+
+        .reward-text {
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        .reward-text span {
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .answers-grid {
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 24px;
+            gap: 12px;
         }
 
-        .poll-option {
-            background: #ffffff;
-            border: 1px solid #e8e8ed;
-            border-radius: 16px;
-            padding: 16px 20px;
+        .answer-btn {
+            background: #f8f9ff;
+            border: 2px solid #e0e4ff;
+            border-radius: 20px;
+            padding: 18px 20px;
             font-size: 16px;
-            color: #1d1d1f;
+            font-weight: 600;
+            color: #1a1a2e;
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 400;
-        }
-
-        .poll-option:hover {
-            background: #f5f5f7;
-        }
-
-        .poll-option.selected {
-            background: #1d1d1f;
-            color: #ffffff;
-            border-color: #1d1d1f;
-        }
-
-        .poll-footer {
+            text-align: left;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 20px;
-            border-top: 1px solid #e8e8ed;
         }
 
-        .reward {
-            background: #ffffff;
-            color: #1d1d1f;
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-weight: 400;
-            font-size: 14px;
-            border: 1px solid #e8e8ed;
+        .answer-btn:hover {
+            background: #eef2ff;
+            border-color: #667eea;
         }
 
-        .progress {
-            color: #86868b;
-            font-size: 14px;
-            font-weight: 400;
+        .answer-btn.correct {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #10b981;
+            animation: pulse 0.5s;
+        }
+
+        .answer-btn.wrong {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-color: #ef4444;
+            animation: shake 0.5s;
+        }
+
+        .answer-letter {
+            width: 30px;
+            height: 30px;
+            background: white;
+            color: #667eea;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .answer-btn.correct .answer-letter,
+        .answer-btn.wrong .answer-letter {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .question-footer {
+            padding: 20px 24px 24px;
+            border-top: 1px solid #667eea20;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+        }
+
+        .next-indicator {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         /* Tasks List */
         .tasks-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
         }
 
         .task-item {
-            background: #f5f5f7;
-            border-radius: 20px;
-            padding: 16px;
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
             display: flex;
             align-items: center;
             gap: 16px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+            border: 1px solid #667eea20;
         }
 
         .task-icon {
-            width: 48px;
-            height: 48px;
-            background: #ffffff;
-            border-radius: 16px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: #1d1d1f;
-            border: 1px solid #e8e8ed;
+            font-size: 24px;
+            color: #667eea;
+            border: 2px solid #667eea30;
         }
 
         .task-info {
@@ -240,9 +396,10 @@
         }
 
         .task-title {
-            font-weight: 500;
-            color: #1d1d1f;
-            margin-bottom: 4px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+            font-size: 16px;
         }
 
         .task-meta {
@@ -252,211 +409,199 @@
         }
 
         .task-type {
-            color: #86868b;
-            font-weight: 400;
+            color: #888;
         }
 
         .task-reward {
-            color: #1d1d1f;
-            font-weight: 500;
+            color: #667eea;
+            font-weight: 700;
         }
 
         .task-btn {
-            background: transparent;
-            color: #1d1d1f;
-            border: 1px solid #d2d2d7;
-            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
             border-radius: 30px;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .task-btn:hover {
-            background: #e8e8ed;
-        }
-
-        .task-btn:active {
-            background: #1d1d1f;
-            color: #ffffff;
-            border-color: #1d1d1f;
         }
 
         /* Referral Card */
         .referral-card {
-            background: #f5f5f7;
-            border-radius: 28px;
-            padding: 24px;
-            color: #1d1d1f;
-            margin-bottom: 20px;
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            border-radius: 30px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 20px 40px -15px #667eea;
         }
 
         .referral-title {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: #1d1d1f;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
         .referral-desc {
-            color: #86868b;
-            font-size: 14px;
-            margin-bottom: 20px;
-            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            font-size: 15px;
         }
 
         .referral-code-box {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 16px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            border: 1px solid #e8e8ed;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .referral-code {
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            color: #1d1d1f;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         .copy-btn {
-            background: transparent;
-            color: #1d1d1f;
-            border: 1px solid #d2d2d7;
-            padding: 8px 16px;
+            background: white;
+            border: none;
+            color: #667eea;
+            padding: 10px 20px;
             border-radius: 30px;
-            font-size: 14px;
-            font-weight: 400;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .copy-btn:active {
-            background: #1d1d1f;
-            color: #ffffff;
         }
 
         .referral-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 12px;
         }
 
         .ref-stat {
-            background: #ffffff;
+            background: rgba(255,255,255,0.1);
             border-radius: 20px;
             padding: 16px;
-            border: 1px solid #e8e8ed;
+            backdrop-filter: blur(5px);
         }
 
         .ref-stat-value {
-            font-size: 22px;
-            font-weight: 500;
+            font-size: 26px;
+            font-weight: 700;
             margin-bottom: 4px;
-            color: #1d1d1f;
         }
 
         .ref-stat-label {
-            color: #86868b;
             font-size: 13px;
-            font-weight: 400;
+            opacity: 0.8;
         }
 
         /* Profile */
+        .profile-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 40px -15px rgba(102, 126, 234, 0.3);
+        }
+
         .profile-header {
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-bottom: 24px;
+            margin-bottom: 25px;
         }
 
-        .avatar {
-            width: 64px;
-            height: 64px;
-            background: #f5f5f7;
-            border-radius: 20px;
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            font-weight: 400;
-            color: #1d1d1f;
-            border: 1px solid #e8e8ed;
+            color: white;
+            font-size: 32px;
+            font-weight: 600;
         }
 
         .profile-info h2 {
-            font-size: 20px;
-            font-weight: 500;
-            color: #1d1d1f;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a2e;
         }
 
         .profile-info p {
-            color: #86868b;
+            color: #888;
             font-size: 14px;
-            margin-top: 4px;
-            font-weight: 400;
+            margin-top: 5px;
         }
 
         .profile-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin: 25px 0;
         }
 
-        .profile-stat-card {
-            background: #f5f5f7;
+        .profile-stat {
+            background: #f8f9ff;
             border-radius: 20px;
-            padding: 16px;
+            padding: 20px;
             text-align: center;
         }
 
-        .profile-stat-number {
-            font-size: 22px;
-            font-weight: 500;
-            color: #1d1d1f;
+        .profile-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .profile-stat-label {
-            color: #86868b;
+            color: #888;
             font-size: 13px;
-            margin-top: 4px;
-            font-weight: 400;
+            margin-top: 5px;
         }
 
         .menu-item {
-            padding: 16px 0;
-            border-bottom: 1px solid #e8e8ed;
+            padding: 18px 0;
+            border-bottom: 1px solid #eef2ff;
             display: flex;
             justify-content: space-between;
-            color: #1d1d1f;
-            font-size: 15px;
-            font-weight: 400;
+            color: #1a1a2e;
+            font-weight: 500;
             cursor: pointer;
         }
 
-        .menu-item:active {
-            opacity: 0.5;
+        .menu-item:last-child {
+            border-bottom: none;
         }
 
         /* Info */
-        .info-card {
-            background: #f5f5f7;
-            border-radius: 24px;
-            padding: 24px;
-            margin-bottom: 16px;
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .info-card h3 {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1d1d1f;
-            margin-bottom: 16px;
+        .info-item {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .info-item h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 15px;
         }
 
         .info-list {
@@ -464,23 +609,22 @@
         }
 
         .info-list li {
-            padding: 8px 0;
-            color: #515154;
+            padding: 10px 0;
+            color: #4a4a6a;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 400;
-            border-bottom: 1px solid #e8e8ed;
+            gap: 12px;
+            border-bottom: 1px solid #eef2ff;
         }
 
         .info-list li:last-child {
             border-bottom: none;
         }
 
-        .info-list li:before {
-            content: "—";
-            color: #c6c6c8;
-            font-weight: 400;
+        .info-list li::before {
+            content: '✓';
+            color: #667eea;
+            font-weight: 700;
         }
 
         /* Fixed Bottom Navigation */
@@ -493,22 +637,24 @@
             max-width: 400px;
             display: flex;
             justify-content: space-around;
-            padding: 12px 16px 20px;
-            background: #ffffff;
-            border-top: 1px solid #e8e8ed;
+            padding: 16px 24px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
             z-index: 100;
+            border-radius: 30px 30px 0 0;
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             cursor: pointer;
             padding: 8px 0 4px;
             width: 20%;
-            opacity: 0.4;
-            transition: opacity 0.2s;
+            opacity: 0.5;
+            transition: all 0.2s;
         }
 
         .nav-item.active {
@@ -521,17 +667,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1d1d1f;
+            color: #667eea;
+        }
+
+        .nav-item.active .nav-icon {
+            color: #764ba2;
         }
 
         .nav-label {
             font-size: 11px;
-            font-weight: 400;
-            color: #86868b;
+            font-weight: 500;
+            color: #1a1a2e;
         }
 
         .nav-item.active .nav-label {
-            color: #1d1d1f;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Icons */
@@ -548,19 +700,19 @@
         }
 
         .icon-poll {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E");
         }
         .icon-tasks {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E");
         }
         .icon-ref {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
         }
         .icon-profile {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
         }
         .icon-info {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='16' x2='12' y2='12'/%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='16' x2='12' y2='12'/%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'/%3E%3C/svg%3E");
         }
 
         /* Sections visibility */
@@ -570,6 +722,23 @@
 
         .section.active {
             display: block;
+        }
+
+        /* Question screen toggle */
+        .question-screen {
+            display: none;
+        }
+
+        .question-screen.active {
+            display: block;
+        }
+
+        .main-screen {
+            display: block;
+        }
+
+        .main-screen.hidden {
+            display: none;
         }
     </style>
 </head>
@@ -582,35 +751,41 @@
 
         <!-- Balance Card -->
         <div class="balance">
-            <div class="balance-label">Баланс</div>
-            <div class="balance-amount">2 845 ₽</div>
-            <div class="balance-stats">
-                <div class="stat-item">
-                    <span class="stat-value">47</span>
-                    <span class="stat-label">опросов</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">23</span>
-                    <span class="stat-label">заданий</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">12</span>
-                    <span class="stat-label">рефералов</span>
-                </div>
-            </div>
+            <div class="balance-label">Твой баланс</div>
+            <div class="balance-amount" id="balanceAmount">1,250</div>
+            <div class="balance-hint"><span>≈ 1 ₽</span></div>
         </div>
 
         <!-- Content -->
         <div class="content">
-            <!-- Polls Section -->
-            <div class="section active" id="polls">
-                <div class="section-header">
-                    <h2 class="section-title">Опросы</h2>
-                    <a href="#" class="section-link">все</a>
+            <!-- Main Sections (Navigation) -->
+            
+            <!-- Questions Section (Main) -->
+            <div class="section active" id="questions">
+                <!-- Main Screen (Start) -->
+                <div class="main-screen" id="mainScreen">
+                    <div class="questions-hero">
+                        <div class="hero-icon">❓</div>
+                        <h2 class="hero-title">Отвечай на вопросы</h2>
+                        <p class="hero-text">
+                            Отвечай правильно и получай коины!<br>
+                            <span style="color: #667eea; font-weight: 600;">+10 коинов</span> за правильный ответ<br>
+                            <span style="color: #ef4444;">-5 коинов</span> за неправильный
+                        </p>
+                        <button class="start-btn" id="startQuestionsBtn">
+                            Приступить!
+                        </button>
+                        <div class="info-badge">
+                            Доступно вопросов: <span id="availableQuestions">5</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="poll-card" id="pollContainer">
-                    <!-- Poll will be inserted here -->
+
+                <!-- Question Screen (Hidden by default) -->
+                <div class="question-screen" id="questionScreen">
+                    <div class="question-card" id="questionCard">
+                        <!-- Dynamic question will be inserted here -->
+                    </div>
                 </div>
             </div>
 
@@ -618,7 +793,7 @@
             <div class="section" id="tasks">
                 <div class="section-header">
                     <h2 class="section-title">Задания</h2>
-                    <a href="#" class="section-link">все</a>
+                    <p class="section-subtitle">Выполняй и получай коины</p>
                 </div>
                 
                 <div class="tasks-list">
@@ -628,7 +803,7 @@
                             <div class="task-title">Установить приложение</div>
                             <div class="task-meta">
                                 <span class="task-type">установка</span>
-                                <span class="task-reward">+150 ₽</span>
+                                <span class="task-reward">+150</span>
                             </div>
                         </div>
                         <button class="task-btn">Старт</button>
@@ -639,7 +814,7 @@
                             <div class="task-title">Подписка на канал</div>
                             <div class="task-meta">
                                 <span class="task-type">соцсети</span>
-                                <span class="task-reward">+50 ₽</span>
+                                <span class="task-reward">+50</span>
                             </div>
                         </div>
                         <button class="task-btn">Старт</button>
@@ -650,7 +825,7 @@
                             <div class="task-title">Просмотр видео</div>
                             <div class="task-meta">
                                 <span class="task-type">видео</span>
-                                <span class="task-reward">+30 ₽</span>
+                                <span class="task-reward">+30</span>
                             </div>
                         </div>
                         <button class="task-btn">Старт</button>
@@ -661,8 +836,8 @@
             <!-- Referral Section -->
             <div class="section" id="referral">
                 <div class="referral-card">
-                    <div class="referral-title">Реферальная программа</div>
-                    <div class="referral-desc">Приглашайте друзей — 15%</div>
+                    <h3 class="referral-title">Реферальная программа</h3>
+                    <p class="referral-desc">Приглашай друзей и получай 15% от их заработка</p>
                     
                     <div class="referral-code-box">
                         <span class="referral-code">QUEST23</span>
@@ -675,7 +850,7 @@
                             <div class="ref-stat-label">приглашено</div>
                         </div>
                         <div class="ref-stat">
-                            <div class="ref-stat-value">+845 ₽</div>
+                            <div class="ref-stat-value">+845</div>
                             <div class="ref-stat-label">заработок</div>
                         </div>
                     </div>
@@ -684,74 +859,78 @@
 
             <!-- Profile Section -->
             <div class="section" id="profile">
-                <div class="profile-header">
-                    <div class="avatar">А</div>
-                    <div class="profile-info">
-                        <h2>Александр</h2>
-                        <p>ID: 8765 4321</p>
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">А</div>
+                        <div class="profile-info">
+                            <h2>Александр</h2>
+                            <p>ID: 8765 4321</p>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="profile-stats">
-                    <div class="profile-stat-card">
-                        <div class="profile-stat-number">47</div>
-                        <div class="profile-stat-label">опросов</div>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">47</div>
+                            <div class="profile-stat-label">всего ответов</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">38</div>
+                            <div class="profile-stat-label">правильных</div>
+                        </div>
                     </div>
-                    <div class="profile-stat-card">
-                        <div class="profile-stat-number">23</div>
-                        <div class="profile-stat-label">заданий</div>
+                    
+                    <div class="menu-item">
+                        <span>Настройки</span>
+                        <span>→</span>
                     </div>
-                </div>
-                
-                <div class="menu-item">
-                    <span>Настройки</span>
-                    <span>→</span>
-                </div>
-                <div class="menu-item">
-                    <span>Вывод средств</span>
-                    <span>→</span>
-                </div>
-                <div class="menu-item">
-                    <span>История</span>
-                    <span>→</span>
-                </div>
-                <div class="menu-item">
-                    <span>Поддержка</span>
-                    <span>→</span>
+                    <div class="menu-item">
+                        <span>Вывод средств</span>
+                        <span>→</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>История</span>
+                        <span>→</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Поддержка</span>
+                        <span>→</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Info Section -->
             <div class="section" id="info">
-                <div class="info-card">
-                    <h3>Как работает</h3>
-                    <ul class="info-list">
-                        <li>Проходите опросы</li>
-                        <li>Выполняйте задания</li>
-                        <li>Приглашайте друзей</li>
-                        <li>Выводите на карту</li>
-                    </ul>
-                </div>
-                
-                <div class="info-card">
-                    <h3>Правила</h3>
-                    <ul class="info-list">
-                        <li>Один аккаунт</li>
-                        <li>Честные ответы</li>
-                        <li>Вывод до 24ч</li>
-                        <li>Поддержка 24/7</li>
-                    </ul>
+                <div class="info-cards">
+                    <div class="info-item">
+                        <h3>Как это работает</h3>
+                        <ul class="info-list">
+                            <li>Отвечай на вопросы</li>
+                            <li>+10 коинов за правильный ответ</li>
+                            <li>-5 коинов за неправильный</li>
+                            <li>Выводи деньги от 1000 коинов</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h3>Правила</h3>
+                        <ul class="info-list">
+                            <li>Один аккаунт</li>
+                            <li>Честные ответы</li>
+                            <li>Вывод до 24ч</li>
+                            <li>Техподдержка 24/7</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Fixed Bottom Navigation -->
         <div class="bottom-nav">
-            <div class="nav-item active" data-section="polls">
+            <div class="nav-item active" data-section="questions">
                 <div class="nav-icon">
                     <div class="icon-poll"></div>
                 </div>
-                <span class="nav-label">Опросы</span>
+                <span class="nav-label">Вопросы</span>
             </div>
             <div class="nav-item" data-section="tasks">
                 <div class="nav-icon">
@@ -781,82 +960,184 @@
     </div>
 
     <script>
-        // Polls data
-        const polls = [
+        // Questions data
+        const questions = [
             {
-                category: 'ФИНАНСЫ',
-                question: 'Каким банком вы пользуетесь?',
-                options: ['Сбербанк', 'Т-Банк', 'Альфа-Банк', 'ВТБ', 'Другой'],
-                reward: 25
+                question: "Сколько планет в Солнечной системе?",
+                options: ["7", "8", "9", "10"],
+                correct: 1 // index 1 = "8"
             },
             {
-                category: 'ТЕХНОЛОГИИ',
-                question: 'Какой смартфон вы используете?',
-                options: ['iPhone', 'Samsung', 'Xiaomi', 'Другой'],
-                reward: 30
+                question: "Какой язык программирования самый популярный?",
+                options: ["Python", "Java", "JavaScript", "C++"],
+                correct: 2 // JavaScript
             },
             {
-                category: 'ОБРАЗ ЖИЗНИ',
-                question: 'Занимаетесь ли спортом?',
-                options: ['Да, регулярно', 'Иногда', 'Нет', 'Планирую'],
-                reward: 20
+                question: "Столица Франции?",
+                options: ["Лондон", "Берлин", "Париж", "Мадрид"],
+                correct: 2 // Париж
+            },
+            {
+                question: "Сколько дней в високосном году?",
+                options: ["365", "366", "364", "367"],
+                correct: 1 // 366
+            },
+            {
+                question: "Какой цвет получается при смешении синего и красного?",
+                options: ["Зеленый", "Фиолетовый", "Оранжевый", "Коричневый"],
+                correct: 1 // Фиолетовый
             }
         ];
 
-        let currentPoll = 0;
-        const pollContainer = document.getElementById('pollContainer');
+        // Game state
+        let currentQuestionIndex = 0;
+        let balance = 1250;
+        let canAnswer = true;
+        let questionsLeft = questions.length;
 
-        function showPoll(index) {
-            if (index >= polls.length) {
-                pollContainer.innerHTML = `
-                    <div class="poll-content" style="text-align: center; padding: 40px 24px;">
-                        <div style="font-size: 40px; color: #1d1d1f; margin-bottom: 16px;">✓</div>
-                        <div style="font-size: 18px; font-weight: 400; margin-bottom: 8px; color: #1d1d1f;">Все опросы пройдены</div>
-                        <div style="color: #86868b; margin-bottom: 24px;">Новые появятся завтра</div>
-                        <button class="task-btn" onclick="resetPolls()">Заново</button>
+        // DOM elements
+        const balanceElement = document.getElementById('balanceAmount');
+        const mainScreen = document.getElementById('mainScreen');
+        const questionScreen = document.getElementById('questionScreen');
+        const questionCard = document.getElementById('questionCard');
+        const availableQuestionsSpan = document.getElementById('availableQuestions');
+
+        // Update balance display
+        function updateBalance() {
+            balanceElement.textContent = balance.toLocaleString();
+        }
+
+        // Update available questions
+        function updateAvailableQuestions() {
+            questionsLeft = questions.length - currentQuestionIndex;
+            availableQuestionsSpan.textContent = questionsLeft;
+        }
+
+        // Show question
+        function showQuestion(index) {
+            if (index >= questions.length) {
+                // No more questions
+                questionCard.innerHTML = `
+                    <div class="question-header" style="text-align: center; padding: 40px 24px;">
+                        <div style="font-size: 50px; margin-bottom: 20px;">🎉</div>
+                        <div class="question-text" style="margin-bottom: 20px;">Все вопросы пройдены!</div>
+                        <div style="color: #666; margin-bottom: 30px;">Завтра будут новые вопросы</div>
+                        <button class="start-btn" onclick="returnToMain()" style="padding: 15px;">На главную</button>
                     </div>
                 `;
                 return;
             }
 
-            const poll = polls[index];
+            const q = questions[index];
             let optionsHtml = '';
-            poll.options.forEach((opt, i) => {
-                optionsHtml += `<div class="poll-option" onclick="selectOption(${i})">${opt}</div>`;
+            
+            q.options.forEach((opt, i) => {
+                const letter = String.fromCharCode(65 + i); // A, B, C, D
+                optionsHtml += `
+                    <div class="answer-btn" onclick="checkAnswer(${i}, ${q.correct})">
+                        ${opt}
+                        <span class="answer-letter">${letter}</span>
+                    </div>
+                `;
             });
 
-            pollContainer.innerHTML = `
-                <div class="poll-content">
-                    <div class="poll-category">${poll.category}</div>
-                    <div class="poll-question">${poll.question}</div>
-                    <div class="poll-options">${optionsHtml}</div>
-                    <div class="poll-footer">
-                        <span class="reward">+${poll.reward} ₽</span>
-                        <span class="progress">${index + 1}/${polls.length}</span>
-                    </div>
+            questionCard.innerHTML = `
+                <div class="question-header">
+                    <div class="question-number">ВОПРОС ${index + 1}/${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                </div>
+                <div class="question-reward">
+                    <span class="reward-coin">🪙</span>
+                    <span class="reward-text">Награда: <span>+10</span> | Штраф: -5</span>
+                </div>
+                <div class="answers-grid" id="answersGrid">
+                    ${optionsHtml}
+                </div>
+                <div class="question-footer">
+                    <span>Правильный ответ: +10</span>
+                    <span class="next-indicator">Выбери ответ</span>
                 </div>
             `;
+            
+            canAnswer = true;
         }
 
-        window.selectOption = function(index) {
-            document.querySelectorAll('.poll-option').forEach(opt => opt.classList.remove('selected'));
-            event.target.classList.add('selected');
+        // Check answer
+        window.checkAnswer = function(selectedIndex, correctIndex) {
+            if (!canAnswer) return;
             
+            const answers = document.querySelectorAll('.answer-btn');
+            const selectedAnswer = answers[selectedIndex];
+            const correctAnswer = answers[correctIndex];
+            
+            canAnswer = false;
+            
+            // Visual feedback
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                selectedAnswer.classList.add('correct');
+                balance += 10;
+                showMessage('Правильно! +10 коинов', 'success');
+            } else {
+                // Wrong answer
+                selectedAnswer.classList.add('wrong');
+                correctAnswer.classList.add('correct');
+                balance = Math.max(0, balance - 5); // Prevent negative balance
+                showMessage('Неправильно! -5 коинов', 'error');
+            }
+            
+            updateBalance();
+            
+            // Move to next question after delay
             setTimeout(() => {
-                currentPoll++;
-                showPoll(currentPoll);
-            }, 300);
+                currentQuestionIndex++;
+                updateAvailableQuestions();
+                
+                if (currentQuestionIndex < questions.length) {
+                    showQuestion(currentQuestionIndex);
+                } else {
+                    // All questions answered
+                    questionCard.innerHTML = `
+                        <div class="question-header" style="text-align: center; padding: 40px 24px;">
+                            <div style="font-size: 50px; margin-bottom: 20px;">🏆</div>
+                            <div class="question-text" style="margin-bottom: 20px;">Ты ответил на все вопросы!</div>
+                            <div style="color: #666; margin-bottom: 30px;">Возвращайся завтра</div>
+                            <button class="start-btn" onclick="returnToMain()" style="padding: 15px;">На главную</button>
+                        </div>
+                    `;
+                }
+            }, 1500);
         };
 
-        window.resetPolls = function() {
-            currentPoll = 0;
-            showPoll(0);
+        // Show message
+        function showMessage(text, type) {
+            const footer = document.querySelector('.question-footer .next-indicator');
+            if (footer) {
+                footer.textContent = text;
+                footer.style.color = type === 'success' ? '#10b981' : '#ef4444';
+            }
+        }
+
+        // Return to main screen
+        window.returnToMain = function() {
+            mainScreen.classList.remove('hidden');
+            questionScreen.classList.remove('active');
+            currentQuestionIndex = 0;
+            updateAvailableQuestions();
         };
+
+        // Start questions
+        document.getElementById('startQuestionsBtn').addEventListener('click', function() {
+            mainScreen.classList.add('hidden');
+            questionScreen.classList.add('active');
+            currentQuestionIndex = 0;
+            showQuestion(0);
+        });
 
         // Navigation
         const navItems = document.querySelectorAll('.nav-item');
         const sections = {
-            polls: document.getElementById('polls'),
+            questions: document.getElementById('questions'),
             tasks: document.getElementById('tasks'),
             referral: document.getElementById('referral'),
             profile: document.getElementById('profile'),
@@ -871,6 +1152,13 @@
                 const sectionName = this.dataset.section;
                 Object.values(sections).forEach(s => s.classList.remove('active'));
                 sections[sectionName].classList.add('active');
+                
+                // If switching to questions section, ensure main screen is visible
+                if (sectionName === 'questions') {
+                    mainScreen.classList.remove('hidden');
+                    questionScreen.classList.remove('active');
+                    updateAvailableQuestions();
+                }
             });
         });
 
@@ -885,12 +1173,15 @@
         document.querySelectorAll('.task-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                alert('Задание запущено');
+                balance += 50;
+                updateBalance();
+                alert('+50 коинов за задание!');
             });
         });
 
-        // Start
-        showPoll(0);
+        // Initialize
+        updateBalance();
+        updateAvailableQuestions();
     </script>
 </body>
 </html>
