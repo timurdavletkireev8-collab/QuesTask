@@ -3,89 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Minimal Bonus · TMA</title>
-    <!-- Google Fonts: чистый гротеск -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <title>темный бонус · tma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Светлая тема (по умолчанию) */
+        /* тёмная тема — базовая (по умолчанию) */
         :root {
-            --bg: #f8f9fc;
-            --surface: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --accent-soft: #4f46e5; /* мягкий индиго */
-            --accent-light: #e0e7ff;
-            --bonus: #0ea5e9;        /* свежий голубой */
-            --success: #10b981;
-            --warning: #f59e0b;
-            --border-subtle: #e9eef2;
-            --shadow-sm: 0 8px 20px -6px rgba(0, 0, 0, 0.05);
-            --radius-lg: 28px;
-            --radius-md: 18px;
-            --radius-sm: 14px;
-            --transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            --bg: #0a0c12;
+            --surface: #14181f;
+            --surface-raised: #1e232c;
+            --text-primary: #f0f4fa;
+            --text-secondary: #9aa8b9;
+            --text-tertiary: #5f6c80;
+            --accent: #7c85ff;
+            --accent-soft: #2f3545;
+            --accent-glow: #8790ff20;
+            --bonus: #6c8cff;
+            --success: #2bbf7c;
+            --success-bg: #1a3a30;
+            --warning: #f5b56b;
+            --border-dim: #262e3a;
+            --border-subtle: #1f2733;
+            --shadow-depth: 0 12px 30px -10px #00000080;
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        /* Тёмная тема (переключается через класс на body) */
-        body.dark {
-            --bg: #0f172a;
-            --surface: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --accent-soft: #818cf8;
-            --accent-light: #334155;
-            --bonus: #38bdf8;
-            --border-subtle: #334155;
-            --shadow-sm: 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+        /* светлая тема (переключение, но базовая тёмная) */
+        body.light {
+            --bg: #f2f5f9;
+            --surface: #ffffff;
+            --surface-raised: #f9fcff;
+            --text-primary: #121926;
+            --text-secondary: #3f4a5c;
+            --text-tertiary: #6e7b8c;
+            --accent: #4f46e5;
+            --accent-soft: #eef2ff;
+            --accent-glow: #4f46e510;
+            --bonus: #0a7cff;
+            --success: #0f8b5e;
+            --success-bg: #e0f7ea;
+            --border-dim: #dce3ec;
+            --border-subtle: #e9eef4;
+            --shadow-depth: 0 8px 24px -10px #1e293b30;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text-primary);
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-weight: 400;
+            line-height: 1.4;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            transition: background-color 0.3s, color 0.2s;
-            padding: 0 0 20px 0;
-            margin: 0;
-            line-height: 1.4;
-            font-weight: 400;
+            transition: background-color 0.2s, color 0.2s;
+            -webkit-font-smoothing: antialiased;
+            padding: 0 0 24px 0;
         }
 
-        /* главный контейнер — имитация экрана мобильного приложения */
         .app-container {
             width: 100%;
             max-width: 420px;
             background-color: var(--bg);
-            padding: 20px 18px 28px;
+            padding: 20px 18px 24px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
 
-        /* ----- плоские карточки / элементы ----- */
+        /* плоские карточки с тонкими границами */
         .card {
             background-color: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 22px 20px;
-            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-xl);
+            padding: 24px 20px;
+            border: 1px solid var(--border-subtle);
             transition: var(--transition);
-            border: 1px solid transparent;
+            box-shadow: var(--shadow-depth);
         }
 
         .card-subtle {
-            background-color: transparent;
-            border: 1px solid var(--border-subtle);
-            box-shadow: none;
-            border-radius: var(--radius-md);
-            padding: 16px 18px;
+            background-color: var(--surface-raised);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            border: 1px solid var(--border-dim);
         }
 
         /* плоские кнопки */
@@ -94,22 +103,21 @@
             align-items: center;
             justify-content: center;
             border: none;
-            background: var(--accent-light);
-            color: var(--accent-soft);
+            background-color: var(--accent-soft);
+            color: var(--accent);
             font-weight: 600;
             font-size: 1rem;
             padding: 14px 22px;
-            border-radius: 50px; /* мягкие капсулы, но плоские */
+            border-radius: 60px;
             transition: var(--transition);
             cursor: pointer;
-            width: fit-content;
-            border: 1px solid transparent;
-            line-height: 1;
             gap: 8px;
+            border: 1px solid transparent;
+            letter-spacing: -0.01em;
         }
 
         .btn-primary {
-            background: var(--accent-soft);
+            background-color: var(--accent);
             color: white;
         }
 
@@ -120,71 +128,87 @@
 
         .btn:active {
             transform: scale(0.97);
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
-        /* прогресс-бар (минималистичный) */
+        .btn:disabled {
+            opacity: 0.35;
+            pointer-events: none;
+            filter: grayscale(0.4);
+        }
+
+        /* прогресс-бар минимальный */
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: var(--border-subtle);
-            border-radius: 20px;
-            margin: 12px 0 6px;
+            height: 6px;
+            background-color: var(--border-dim);
+            border-radius: 12px;
             overflow: hidden;
+            margin: 14px 0 8px;
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--accent-soft);
+            background-color: var(--accent);
             width: 0%;
-            border-radius: 20px;
-            transition: width 0.4s ease;
+            border-radius: 12px;
+            transition: width 0.3s ease;
         }
 
-        /* иконки / цифры */
+        /* типографика */
         .flex-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .balance-large {
-            font-size: 2.6rem;
+            font-size: 3rem;
             font-weight: 500;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
             line-height: 1;
             color: var(--text-primary);
         }
 
         .badge {
-            background: var(--accent-light);
-            padding: 4px 12px;
+            background-color: var(--accent-soft);
+            padding: 4px 14px;
             border-radius: 40px;
             font-size: 0.85rem;
             font-weight: 500;
-            color: var(--accent-soft);
+            color: var(--accent);
         }
 
-        .stat-value {
-            font-weight: 600;
-            font-size: 1.4rem;
-            color: var(--text-primary);
+        .badge-success {
+            background-color: var(--success-bg);
+            color: var(--success);
+        }
+
+        .badge-dim {
+            background-color: var(--border-dim);
+            color: var(--text-secondary);
         }
 
         .hint-text {
             color: var(--text-secondary);
             font-size: 0.9rem;
+            font-weight: 400;
         }
 
-        /* анимация появления цифр (лёгкий pop) */
+        .small-mono {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            font-weight: 450;
+        }
+
+        /* плавное появление цифр */
         @keyframes gentlePop {
-            0% { opacity: 0; transform: translateY(6px); }
+            0% { opacity: 0.3; transform: translateY(5px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
         .animate-balance {
-            animation: gentlePop 0.3s ease forwards;
+            animation: gentlePop 0.25s ease-out forwards;
         }
 
         /* экран подписки (оверлей) */
@@ -196,212 +220,205 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            backdrop-filter: blur(2px);
+            padding: 20px;
+            backdrop-filter: blur(4px);
         }
 
         .sub-card {
             background: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 32px 24px;
+            border-radius: var(--radius-xl);
+            padding: 36px 26px;
             text-align: center;
             max-width: 360px;
-            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-depth);
         }
 
-        .channel-list {
-            background: var(--accent-light);
-            border-radius: var(--radius-sm);
-            padding: 12px;
-            margin: 20px 0;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            opacity: 0.9;
+        .channel-badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 24px 0 12px;
+        }
+        .channel-badge {
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-dim);
         }
 
-        /* маленькие разделители */
         hr {
             border: none;
-            border-top: 1px solid var(--border-subtle);
-            margin: 16px 0;
+            border-top: 1px solid var(--border-dim);
+            margin: 18px 0;
         }
 
-        /* адаптивность */
-        @media (max-width: 380px) {
-            .app-container { padding: 16px; }
-            .balance-large { font-size: 2.2rem; }
-        }
-
-        /* скрытие элементов */
         .hidden {
             display: none !important;
         }
 
-        /* кнопка переключения темы (мини) */
+        /* переключатель темы (микро) */
         .theme-toggle {
-            background: var(--surface);
-            border: 1px solid var(--border-subtle);
+            background: var(--surface-raised);
+            border: 1px solid var(--border-dim);
             border-radius: 40px;
             padding: 8px 14px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             cursor: pointer;
-            align-self: flex-end;
             transition: var(--transition);
         }
         .theme-toggle:active { opacity: 0.6; }
+
+        /* история плоскими строками */
+        .history-item {
+            background-color: var(--surface-raised);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            border: 1px solid var(--border-dim);
+            transition: var(--transition);
+        }
     </style>
 </head>
-<body class="">
-    <!-- ЭКРАН ПОДПИСКИ (изначально виден) -->
+<body class="dark"> <!-- тёмная тема базово (dark класс) -->
+    <!-- ЭКРАН ПОДПИСКИ (виден изначально) -->
     <div id="subscriptionScreen" class="subscription-overlay">
         <div class="sub-card">
-            <div style="font-size: 38px; margin-bottom: 12px;">📢</div>
-            <h2 style="font-weight: 500; margin-bottom: 8px;">Подпишитесь на каналы</h2>
-            <p class="hint-text" style="margin-bottom: 24px;">Чтобы пользоваться приложением, нужно быть подписчиком</p>
+            <span style="font-size: 44px; margin-bottom: 8px; display: block;">🔒</span>
+            <h2 style="font-weight: 500; margin-bottom: 10px; color: var(--text-primary);">нужна подписка</h2>
+            <p class="hint-text" style="margin-bottom: 26px;">оформи подписку на каналы, чтобы войти</p>
             
-            <!-- Список обязательных каналов (имитация) -->
-            <div class="channel-list flex-row" style="justify-content: center; gap: 16px;">
-                <span>@bonus_news</span>
-                <span>@daily_offers</span>
-                <span>@crypto_trend</span>
+            <div class="channel-badge-list">
+                <span class="channel-badge">@bonus_wave</span>
+                <span class="channel-badge">@daily_offers</span>
+                <span class="channel-badge">@crypto_pulse</span>
             </div>
 
-            <!-- Плоская кнопка ПОДПИСАТЬСЯ (имитация проверки) -->
-            <button class="btn btn-primary btn-block" id="fakeSubscribeBtn" style="margin-top: 12px;">
-                ✅ Я подписался
+            <!-- плоская кнопка "подписаться" (имитация) -->
+            <button class="btn btn-primary btn-block" id="fakeSubscribeBtn" style="margin-top: 18px;">
+                ✅ я подписался
             </button>
-            <p class="hint-text" style="margin-top: 20px; font-size: 0.8rem;">* после проверки подписки интерфейс разблокируется</p>
+            <p class="hint-text" style="margin-top: 18px; font-size: 0.75rem;">* после проверки бэкендом интерфейс разблокируется</p>
         </div>
     </div>
 
-    <!-- ОСНОВНОЙ ИНТЕРФЕЙС (изначально скрыт) -->
+    <!-- ОСНОВНОЙ ИНТЕРФЕЙС (скрыт до подписки) -->
     <div id="mainApp" class="app-container hidden">
 
-        <!-- Шапка: баланс и тема -->
-        <div class="flex-row" style="margin-bottom: 4px;">
+        <!-- шапка: баланс + переключатель темы -->
+        <div class="flex-row">
             <div>
-                <span class="badge">💰 Баланс</span>
+                <span class="badge badge-dim">💰 твой счёт</span>
             </div>
-            <button class="theme-toggle" id="themeSwitch">🌓 тёмная</button>
+            <button class="theme-toggle" id="themeSwitch">🌞 светлая</button>
         </div>
 
-        <!-- Крупный баланс с анимацией -->
-        <div class="card" style="padding: 22px 20px;">
+        <!-- карточка баланса (крупно) -->
+        <div class="card" style="padding: 24px 22px;">
             <div class="flex-row" style="margin-bottom: 2px;">
                 <span class="balance-large" id="balanceDisplay">0</span>
-                <span style="font-size: 1.2rem; color: var(--text-secondary);">₽</span>
+                <span style="font-size: 1.5rem; color: var(--text-tertiary);">₽</span>
             </div>
             <div class="flex-row hint-text">
                 <span>доступно для вывода</span>
-                <span id="minWithdrawHint">мин. 50 ₽</span>
+                <span id="minWithdrawHint" class="small-mono">мин 50 ₽</span>
             </div>
         </div>
 
-        <!-- Кнопка бонуса за рекламу (плоская, с анимацией) -->
+        <!-- кнопка бонуса (реклама) — плоская, яркая -->
         <button class="btn btn-block" id="bonusBtn" style="background: var(--bonus); color: white; padding: 18px; font-size: 1.2rem;">
-            🎁 Получить бонус (1–100 ₽)
+            <span>✨</span> получить бонус (1–100 ₽)
         </button>
 
-        <!-- Блок рефералов и вывода -->
-        <div class="card" style="padding: 20px;">
+        <!-- блок рефералов и вывода -->
+        <div class="card" style="padding: 24px 20px;">
+            <!-- реферальная часть -->
             <div class="flex-row" style="margin-bottom: 14px;">
-                <span style="font-weight: 600;">👥 Пригласил друзей</span>
+                <span style="font-weight: 600;">👥 рефералы</span>
                 <span class="badge" id="referralCountDisplay">0 / 3</span>
             </div>
-            <!-- Прогресс рефералов (для вывода) -->
             <div class="progress-bar">
                 <div class="progress-fill" id="referralProgress" style="width: 0%;"></div>
             </div>
-            <div class="flex-row hint-text" style="margin-top: 8px;">
-                <span>нужно 3 активных друга</span>
+            <div class="flex-row hint-text" style="margin-top: 6px;">
+                <span>активные друзья (подписка+бонус)</span>
                 <span id="referralStatus">не выполнено</span>
             </div>
 
             <hr>
 
-            <div class="flex-row" style="margin-bottom: 6px;">
-                <span style="font-weight: 500;">🔗 Реферальная ссылка</span>
-                <button class="btn" id="copyRefLink" style="padding: 8px 16px; font-size: 0.85rem;">копировать</button>
+            <!-- реферальная ссылка + копия -->
+            <div class="flex-row" style="margin-bottom: 10px;">
+                <span style="font-weight: 500;">🔗 твоя ссылка</span>
+                <button class="btn" id="copyRefLink" style="padding: 8px 16px; font-size: 0.8rem;">копировать</button>
             </div>
-            <div class="card-subtle" style="word-break: break-all; font-size: 0.85rem;">
-                <span id="refLink">https://t.me/mini_bot?start=ref_123abc</span>
+            <div class="card-subtle" style="word-break: break-all; font-size: 0.8rem; color: var(--text-secondary);">
+                <span id="refLink">https://t.me/mini_bot?start=ref_uLyX7</span>
             </div>
 
-            <!-- Условия вывода + прогресс-бар -->
-            <div style="margin-top: 22px;">
-                <div class="flex-row">
-                    <span style="font-weight: 500;">💸 Вывод средств</span>
-                    <span class="badge" id="withdrawStatusBadge">заблокировано</span>
+            <!-- прогресс вывода -->
+            <div style="margin-top: 24px;">
+                <div class="flex-row" style="margin-bottom: 8px;">
+                    <span style="font-weight: 600;">💸 вывод средств</span>
+                    <span class="badge" id="withdrawStatusBadge">⛔ недоступен</span>
                 </div>
-
-                <!-- Прогресс выполнения условий (подписки друзей и т.д.) -->
-                <div class="progress-bar" style="margin: 16px 0 8px;">
+                <div class="progress-bar">
                     <div class="progress-fill" id="withdrawProgressFill" style="width: 0%;"></div>
                 </div>
-                <div class="flex-row hint-text">
-                    <span>подписки друзей</span>
-                    <span id="withdrawProgressText">0/3</span>
-                </div>
-                <div class="flex-row hint-text" style="margin-top: 4px;">
-                    <span>баланс ≥50₽</span>
-                    <span id="balanceConditionIcon">❌</span>
+                <div class="flex-row hint-text" style="margin-top: 8px;">
+                    <span>рефералы: <span id="withdrawProgressText">0/3</span></span>
+                    <span>баланс: <span id="balanceConditionIcon">❌</span> ≥50₽</span>
                 </div>
 
-                <!-- Кнопка вывода (активируется при выполнении) -->
-                <button class="btn btn-block" id="withdrawBtn" disabled style="margin-top: 22px; opacity: 0.5; background: var(--accent-light); color: var(--text-secondary);">
-                    📤 Вывести
+                <!-- кнопка вывода -->
+                <button class="btn btn-block" id="withdrawBtn" disabled style="margin-top: 24px;">
+                    📤 вывести
                 </button>
             </div>
         </div>
 
-        <!-- История начислений / выводов (аккуратный список) -->
-        <div class="card" style="padding: 18px;">
-            <span style="font-weight: 600; margin-bottom: 16px; display: block;">📋 История</span>
-            <div id="historyList" style="display: flex; flex-direction: column; gap: 14px;">
-                <!-- Динамически добавляется через JS, но для образца пара записей -->
-                <div class="flex-row hint-text">
-                    <span>➕ Бонус за рекламу</span>
+        <!-- история начислений (аккуратные записи) -->
+        <div class="card" style="padding: 20px;">
+            <span style="font-weight: 600; margin-bottom: 16px; display: block;">📋 история операций</span>
+            <div id="historyList" style="display: flex; flex-direction: column; gap: 10px;">
+                <!-- динамические элементы через JS -->
+                <div class="history-item flex-row">
+                    <span class="hint-text">➕ бонус за рекламу</span>
                     <span style="color: var(--success);">+15 ₽</span>
                 </div>
-                <div class="flex-row hint-text">
-                    <span>➕ Бонус за рекламу</span>
+                <div class="history-item flex-row">
+                    <span class="hint-text">➕ бонус</span>
                     <span style="color: var(--success);">+42 ₽</span>
-                </div>
-                <div class="flex-row hint-text" style="color: var(--text-secondary);">
-                    <span>📤 Запрос вывода</span>
-                    <span>—</span>
                 </div>
             </div>
         </div>
-
-        <!-- Маленький футер (доп. информация) -->
-        <div class="flex-row hint-text" style="justify-content: center; margin-top: 8px;">
-            <span>Mini App · плоский дизайн</span>
+        <!-- деликатный футер -->
+        <div class="flex-row hint-text" style="justify-content: center; margin-top: 4px;">
+            <span>minimal app · flat · dark</span>
         </div>
     </div>
 
     <script>
         (function() {
-            // ---------- СОСТОЯНИЕ ПРИЛОЖЕНИЯ (имитация данных) ----------
-            // Для вставки реальной backend-логики: проверка подписок через телеграм, 
-            // начисление бонусов, рефералы приходят с сервера.
-
-            let balance = 42;          // стартовый баланс (для демо)
-            let referrals = 2;          // кол-во приглашённых, которые подписались и активировались
+            // --- СОСТОЯНИЕ ПРИЛОЖЕНИЯ (имитация данных) ---
+            let balance = 34;           // стартовый баланс (чуть меньше 50 для наглядности)
+            let referrals = 1;           // кол-во активных друзей
             const requiredReferrals = 3;
             const minWithdraw = 50;
 
-            // История (массив объектов)
             let history = [
-                { type: 'bonus', amount: 15, date: 'только что' },
-                { type: 'bonus', amount: 42, date: '2 часа назад' },
+                { type: 'bonus', amount: 15 },
+                { type: 'bonus', amount: 42 },
             ];
 
-            // Флаг подписки (имитация: после нажатия "я подписался" скрываем экран)
-            let isSubscribed = false;   // при старте false
+            // подписка (имитация)
+            let isSubscribed = false;
 
-            // ---------- ЭЛЕМЕНТЫ DOM ----------
+            // --- DOM элементы ---
             const subscriptionScreen = document.getElementById('subscriptionScreen');
             const mainApp = document.getElementById('mainApp');
             const subscribeBtn = document.getElementById('fakeSubscribeBtn');
@@ -420,199 +437,151 @@
             const copyRefBtn = document.getElementById('copyRefLink');
             const refLinkSpan = document.getElementById('refLink');
 
-            // ---------- ФУНКЦИИ ОБНОВЛЕНИЯ UI ----------
-            function updateUI() {
-                // 1. Баланс с анимацией
+            // --- вспомогательная функция обновления UI (централизованно) ---
+            function refreshUI() {
+                // баланс с анимацией
                 balanceSpan.textContent = balance;
                 balanceSpan.classList.add('animate-balance');
-                setTimeout(() => balanceSpan.classList.remove('animate-balance'), 300);
+                setTimeout(() => balanceSpan.classList.remove('animate-balance'), 250);
 
-                // 2. Прогресс рефералов
-                const referralProgressPercent = (referrals / requiredReferrals) * 100;
-                referralProgress.style.width = `${Math.min(referralProgressPercent, 100)}%`;
+                // реферальный прогресс
+                const referralPercent = (referrals / requiredReferrals) * 100;
+                referralProgress.style.width = `${Math.min(referralPercent, 100)}%`;
                 referralCountSpan.textContent = `${referrals} / ${requiredReferrals}`;
-                referralStatus.textContent = referrals >= requiredReferrals ? '✅ выполнено' : '⏳ не хватает';
+                referralStatus.textContent = referrals >= requiredReferrals ? '✅ готово' : `👥 ${referrals}/${requiredReferrals}`;
+                referralStatus.style.color = referrals >= requiredReferrals ? 'var(--success)' : 'var(--text-secondary)';
 
-                // 3. Условия для вывода
+                // условия вывода
                 const balanceOk = balance >= minWithdraw;
                 const referralsOk = referrals >= requiredReferrals;
                 const canWithdraw = balanceOk && referralsOk;
 
-                // Прогресс-бар вывода (комбинированный: 50% баланс, 50% рефералы)
-                let totalConditions = 0;
-                if (balanceOk) totalConditions += 1;
-                if (referralsOk) totalConditions += 1;
-                const withdrawProgressPercent = (totalConditions / 2) * 100; // два условия
-                withdrawProgressFill.style.width = `${withdrawProgressPercent}%`;
+                // прогресс-бар вывода (два условия: 50% баланс, 50% рефералы)
+                let conditionsMet = 0;
+                if (balanceOk) conditionsMet++;
+                if (referralsOk) conditionsMet++;
+                const withdrawPercent = (conditionsMet / 2) * 100;
+                withdrawProgressFill.style.width = `${withdrawPercent}%`;
                 withdrawProgressText.textContent = `${referrals}/${requiredReferrals}`;
                 balanceConditionIcon.textContent = balanceOk ? '✅' : '❌';
-                
+
                 if (canWithdraw) {
                     withdrawBtn.disabled = false;
-                    withdrawBtn.style.opacity = '1';
                     withdrawBtn.style.background = 'var(--success)';
                     withdrawBtn.style.color = 'white';
-                    withdrawStatusBadge.textContent = 'можно вывести';
-                    withdrawStatusBadge.style.background = '#d1fae5';
-                    withdrawStatusBadge.style.color = '#065f46';
+                    withdrawStatusBadge.textContent = '✅ можно вывести';
+                    withdrawStatusBadge.classList.add('badge-success');
                 } else {
                     withdrawBtn.disabled = true;
-                    withdrawBtn.style.opacity = '0.5';
-                    withdrawBtn.style.background = 'var(--accent-light)';
-                    withdrawBtn.style.color = 'var(--text-secondary)';
-                    withdrawStatusBadge.textContent = 'заблокировано';
-                    withdrawStatusBadge.style.background = '#fee2e2';
-                    withdrawStatusBadge.style.color = '#991b1b';
+                    withdrawBtn.style.background = 'var(--accent-soft)';
+                    withdrawBtn.style.color = 'var(--text-tertiary)';
+                    withdrawStatusBadge.textContent = '⛔ недоступен';
+                    withdrawStatusBadge.classList.remove('badge-success');
                 }
 
-                // 4. Обновить историю (выведем последние операции)
-                // Очищаем и рендерим заново (для простоты)
+                // отрисовка истории (последние 4)
                 historyDiv.innerHTML = '';
-                if (history.length === 0) {
-                    historyDiv.innerHTML = '<div class="hint-text">пока ничего нет</div>';
+                const lastItems = history.slice(-4).reverse();
+                if (lastItems.length === 0) {
+                    historyDiv.innerHTML = '<div class="history-item hint-text">пусто</div>';
                 } else {
-                    // Покажем последние 3 записи
-                    history.slice(-3).reverse().forEach(item => {
+                    lastItems.forEach(item => {
                         const row = document.createElement('div');
-                        row.className = 'flex-row hint-text';
+                        row.className = 'history-item flex-row';
                         if (item.type === 'bonus') {
-                            row.innerHTML = `<span>➕ Бонус за рекламу</span><span style="color: var(--success);">+${item.amount} ₽</span>`;
+                            row.innerHTML = `<span class="hint-text">➕ бонус за рекламу</span><span style="color: var(--success);">+${item.amount} ₽</span>`;
                         } else if (item.type === 'withdraw') {
-                            row.innerHTML = `<span>📤 Вывод</span><span>-${item.amount} ₽</span>`;
+                            row.innerHTML = `<span class="hint-text">📤 вывод</span><span style="color: var(--text-tertiary);">-${item.amount} ₽</span>`;
                         } else {
-                            row.innerHTML = `<span>${item.type}</span><span>${item.amount} ₽</span>`;
+                            row.innerHTML = `<span class="hint-text">${item.type}</span><span>${item.amount} ₽</span>`;
                         }
                         historyDiv.appendChild(row);
                     });
                 }
             }
 
-            // Добавить запись в историю
-            function addHistoryEntry(type, amount) {
-                history.push({ type, amount, date: 'только что' });
-                if (history.length > 5) history.shift(); // оставим последние 5
-                updateUI();
+            // добавить запись истории
+            function addHistory(type, amount) {
+                history.push({ type, amount });
+                if (history.length > 6) history.shift();
+                refreshUI();
             }
 
-            // ---------- ИМИТАЦИЯ ПРОВЕРКИ ПОДПИСКИ ----------
-            subscribeBtn.addEventListener('click', function() {
-                // Здесь должна быть реальная проверка через Telegram WebApp API 
-                // или вызов backend для проверки подписки.
-                // Сейчас просто скрываем экран и показываем приложение.
+            // --- обработчик подписки ---
+            subscribeBtn.addEventListener('click', () => {
+                // здесь должен быть запрос к бэкенду на проверку подписок
                 isSubscribed = true;
                 subscriptionScreen.classList.add('hidden');
                 mainApp.classList.remove('hidden');
-                // Небольшой Initial UI апдейт
-                updateUI();
+                refreshUI();
             });
 
-            // ---------- ПОЛУЧЕНИЕ БОНУСА (ПРОСМОТР РЕКЛАМЫ) ----------
-            bonusBtn.addEventListener('click', function() {
-                // Здесь должен быть вызов показа рекламы (например, Telegram Ad или оффер)
-                // После успешного просмотра — начисляем бонус.
-                
-                // Генерируем случайную сумму от 1 до 100
-                const bonusAmount = Math.floor(Math.random() * 100) + 1; 
-                balance += bonusAmount;
-
-                // Добавляем в историю
-                addHistoryEntry('bonus', bonusAmount);
-
-                // Анимация уже внутри updateUI (цифра меняется с анимацией)
-                updateUI();
-
-                // Можно также показать всплывающее уведомление, но по ТЗ достаточно анимации цифр
+            // --- бонус за просмотр рекламы ---
+            bonusBtn.addEventListener('click', () => {
+                // здесь: вызов рекламного SDK / оффера. после успеха:
+                const bonus = Math.floor(Math.random() * 100) + 1; // 1-100
+                balance += bonus;
+                addHistory('bonus', bonus);
             });
 
-            // ---------- РЕФЕРАЛЬНАЯ СИСТЕМА (имитация добавления друга) ----------
-            // Для демо: будем увеличивать рефералов по клику на "копировать ссылку" (не совсем правильно, но показательно)
-            // или добавим скрытый механизм. Лучше создадим кнопку плюс для теста.
-            // Чтобы UI был живым, сделаем +1 друг по долгому нажатию на счётчик (просто для теста)
-            referralCountSpan.addEventListener('dblclick', function(e) {
-                // Увеличим число рефералов (до 3 макс) — для демонстрации прогресса
+            // --- реферальная система (тест: двойной клик на счётчике увеличивает) ---
+            referralCountSpan.addEventListener('dblclick', (e) => {
                 if (referrals < requiredReferrals) {
                     referrals++;
-                    updateUI();
+                    refreshUI();
                 }
             });
-
-            // также можно сбросить рефералов (для теста) по Alt+клик на бейдж
-            referralStatus.addEventListener('click', function(e) {
+            // alt+клик на статус сброс (для теста)
+            referralStatus.addEventListener('click', (e) => {
                 if (e.altKey) {
                     referrals = 0;
-                    updateUI();
+                    refreshUI();
                 }
             });
 
-            // Кнопка копирования реферальной ссылки
-            copyRefBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText(refLinkSpan.textContent).then(() => {
-                    alert('Ссылка скопирована! (в бэкенде фиксируется приглашение)');
-                    // При желании можно увеличивать счетчик только после регистрации друга, но здесь просто тест
-                });
+            // копирование ссылки (имитация)
+            copyRefBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(refLinkSpan.textContent);
+                // здесь бэкенд может фиксировать переходы
+                alert('✅ реферальная ссылка скопирована');
             });
 
-            // ---------- ВЫВОД СРЕДСТВ ----------
-            withdrawBtn.addEventListener('click', function() {
+            // --- вывод средств ---
+            withdrawBtn.addEventListener('click', () => {
                 if (withdrawBtn.disabled) return;
-                // Списываем баланс (можно часть или всё)
-                const withdrawAmount = balance; // выводим всё для простоты
-                if (withdrawAmount >= minWithdraw) {
+                if (balance >= minWithdraw && referrals >= requiredReferrals) {
+                    const withdrawAmount = balance; // выводим всё
                     balance = 0;
-                    addHistoryEntry('withdraw', withdrawAmount);
-                    updateUI();
-                    alert(`Заявка на вывод ${withdrawAmount} ₽ создана (имитация).`);
-                } else {
-                    alert('Минимальная сумма вывода 50₽');
+                    addHistory('withdraw', withdrawAmount);
+                    refreshUI();
                 }
             });
 
-            // ---------- ТЁМНАЯ ТЕМА ----------
-            themeSwitch.addEventListener('click', function() {
-                document.body.classList.toggle('dark');
-                themeSwitch.textContent = document.body.classList.contains('dark') ? '☀️ светлая' : '🌓 тёмная';
+            // --- переключение темы (тёмная базовая, светлая как опция) ---
+            themeSwitch.addEventListener('click', () => {
+                document.body.classList.toggle('light');
+                themeSwitch.textContent = document.body.classList.contains('light') ? '🌙 тёмная' : '🌞 светлая';
             });
 
-            // ---------- НАЧАЛЬНАЯ ИНИЦИАЛИЗАЦИЯ ----------
-            // Показываем overlay подписки (isSubscribed = false), скрыто приложение
-            // но настройки UI
-            updateUI();
+            // стартовое обновление
+            refreshUI();
 
-            // небольшая подсказка: можно убрать экран подписки для отладки (закомментировать ниже)
-            // РАскомментировать, чтобы сразу видеть приложение без подписки (для разработки)
+            // для удобства разработки можно закомментировать экран подписки:
             // subscriptionScreen.classList.add('hidden');
             // mainApp.classList.remove('hidden');
         })();
     </script>
 
-    <!-- Комментарии для backend-разработчика (вставка логики) -->
-    <!--
-        ========== ВСТАВКА BACKEND-ЛОГИКИ ==========
-        1. ПОДПИСКА: 
-           - Реальная проверка через `Telegram.WebApp.initData` или вызов метода `telegram-web-app/checkSubscription`.
-           - Вместо `fakeSubscribeBtn` нужно отправить запрос на сервер и сверить статус подписки на каналы (например, @bonus_news, @daily_offers, @crypto_trend).
-           - При успехе – скрыть overlay, установить `isSubscribed = true`.
-
-        2. НАЧИСЛЕНИЕ БОНУСА:
-           - В обработчике `bonusBtn` вызвать показ рекламного оффера (использовать Telegram Web App showPopup или открыть ссылку).
-           - После успешного завершения рекламы – запрос к backend на начисление случайной суммы (1-100). Ответ обновляет баланс.
-           - Сохранять историю начислений в базе данных.
-
-        3. РЕФЕРАЛЫ:
-           - Уникальная ссылка формируется на сервере: `https://t.me/ваш_бот?start=ref_{user_id}`.
-           - При переходе друга и выполнении им условий (подписка + первый бонус) – увеличивать счетчик рефералов (`referrals`) у текущего пользователя.
-           - Прогресс-бар и статус вывода обновляются после подтверждения.
-
-        4. ВЫВОД:
-           - Кнопка активируется когда `balance >= minWithdraw` (50) и `referrals >= 3`.
-           - При клике отправлять запрос на создание выплаты. В демо просто списываем баланс.
-           - Добавлять запись в историю выводов.
-
-        5. ИСТОРИЯ:
-           - Запрашивать с сервера последние операции (бонусы/выводы). 
-
-        6. ТЁМНАЯ ТЕМА: можно сохранять выбор пользователя через `Telegram.WebApp.themeParams`.
-        =============================================
+    <!-- 
+        ========== BACKEND-ИНТЕГРАЦИЯ ==========
+        • Подписки: заменить `fakeSubscribeBtn` на реальную проверку через Telegram Web App (или бэкенд).
+        • Бонус: после успешного просмотра рекламы отправлять запрос на `https://api.example.com/bonus/claim` 
+          и получать актуальный баланс.
+        • Рефералы: уникальная ссылка должна формироваться динамически. При активации друга (подписка + получение бонуса) 
+          увеличивать счетчик.
+        • Вывод: при клике отправлять запрос на создание выплаты, баланс списывать после подтверждения.
+        • История: загружать с сервера при открытии приложения.
+        • Тема: можно синхронизировать с Telegram.WebApp.colorScheme.
     -->
 </body>
-</html>
+    </html>
