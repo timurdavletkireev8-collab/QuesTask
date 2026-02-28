@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>QuesTask — Mono</title>
+    <title>QuesTask — Minimal White</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background: #000000;
+            background: #f5f5f7;
             display: flex;
             justify-content: center;
             min-height: 100vh;
@@ -22,54 +22,55 @@
         .app {
             max-width: 400px;
             width: 100%;
-            background: #000000;
+            background: #ffffff;
             position: relative;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            color: #ffffff;
+            color: #1d1d1f;
+            box-shadow: 0 0 1px rgba(0,0,0,0.05);
         }
 
         /* Header */
         .header {
             padding: 24px 20px 12px;
-            background: #000000;
+            background: #ffffff;
         }
 
         .logo {
             font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            color: #1d1d1f;
         }
 
         .logo span {
-            color: #ffffff;
-            opacity: 0.7;
+            font-weight: 300;
+            color: #86868b;
         }
 
         /* Balance Card */
         .balance {
             margin: 8px 20px 20px;
-            background: #111111;
-            border-radius: 28px;
+            background: #f5f5f7;
+            border-radius: 24px;
             padding: 22px;
-            color: #ffffff;
-            border: 1px solid #222222;
+            color: #1d1d1f;
         }
 
         .balance-label {
             font-size: 14px;
-            color: #888888;
+            color: #86868b;
             margin-bottom: 6px;
+            font-weight: 400;
         }
 
         .balance-amount {
             font-size: 36px;
-            font-weight: 700;
+            font-weight: 500;
             letter-spacing: -0.5px;
             margin-bottom: 18px;
-            color: #ffffff;
+            color: #1d1d1f;
         }
 
         .balance-stats {
@@ -84,14 +85,15 @@
 
         .stat-value {
             font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #1d1d1f;
         }
 
         .stat-label {
             font-size: 13px;
-            color: #888888;
+            color: #86868b;
             margin-top: 2px;
+            font-weight: 400;
         }
 
         /* Main Content */
@@ -111,22 +113,20 @@
 
         .section-title {
             font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #1d1d1f;
         }
 
         .section-link {
-            color: #ffffff;
+            color: #86868b;
             font-size: 14px;
             text-decoration: none;
             font-weight: 400;
-            opacity: 0.5;
         }
 
         /* Poll Card */
         .poll-card {
-            background: #111111;
-            border: 1px solid #222222;
+            background: #f5f5f7;
             border-radius: 24px;
             overflow: hidden;
             margin-bottom: 20px;
@@ -139,7 +139,7 @@
         .poll-category {
             font-size: 13px;
             font-weight: 400;
-            color: #888888;
+            color: #86868b;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             margin-bottom: 12px;
@@ -147,38 +147,39 @@
 
         .poll-question {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.4;
-            color: #ffffff;
+            color: #1d1d1f;
             margin-bottom: 24px;
         }
 
         .poll-options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 24px;
         }
 
         .poll-option {
-            background: #1a1a1a;
-            border: 1px solid #333333;
+            background: #ffffff;
+            border: 1px solid #e8e8ed;
             border-radius: 16px;
             padding: 16px 20px;
             font-size: 16px;
-            color: #ffffff;
+            color: #1d1d1f;
             cursor: pointer;
             transition: all 0.2s;
+            font-weight: 400;
         }
 
         .poll-option:hover {
-            background: #222222;
+            background: #f5f5f7;
         }
 
         .poll-option.selected {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
+            background: #1d1d1f;
+            color: #ffffff;
+            border-color: #1d1d1f;
         }
 
         .poll-footer {
@@ -186,21 +187,21 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 20px;
-            border-top: 1px solid #222222;
+            border-top: 1px solid #e8e8ed;
         }
 
         .reward {
-            background: #1a1a1a;
-            color: #ffffff;
+            background: #ffffff;
+            color: #1d1d1f;
             padding: 6px 16px;
             border-radius: 40px;
-            font-weight: 500;
+            font-weight: 400;
             font-size: 14px;
-            border: 1px solid #333333;
+            border: 1px solid #e8e8ed;
         }
 
         .progress {
-            color: #888888;
+            color: #86868b;
             font-size: 14px;
             font-weight: 400;
         }
@@ -209,12 +210,11 @@
         .tasks-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .task-item {
-            background: #111111;
-            border: 1px solid #222222;
+            background: #f5f5f7;
             border-radius: 20px;
             padding: 16px;
             display: flex;
@@ -225,14 +225,14 @@
         .task-icon {
             width: 48px;
             height: 48px;
-            background: #1a1a1a;
+            background: #ffffff;
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            color: #ffffff;
-            border: 1px solid #333333;
+            color: #1d1d1f;
+            border: 1px solid #e8e8ed;
         }
 
         .task-info {
@@ -240,8 +240,8 @@
         }
 
         .task-title {
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #1d1d1f;
             margin-bottom: 4px;
         }
 
@@ -252,117 +252,119 @@
         }
 
         .task-type {
-            color: #888888;
+            color: #86868b;
+            font-weight: 400;
         }
 
         .task-reward {
-            color: #ffffff;
+            color: #1d1d1f;
             font-weight: 500;
         }
 
         .task-btn {
             background: transparent;
-            color: #ffffff;
-            border: 1px solid #444444;
+            color: #1d1d1f;
+            border: 1px solid #d2d2d7;
             padding: 8px 16px;
             border-radius: 30px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .task-btn:hover {
-            background: #1a1a1a;
+            background: #e8e8ed;
         }
 
         .task-btn:active {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
+            background: #1d1d1f;
+            color: #ffffff;
+            border-color: #1d1d1f;
         }
 
         /* Referral Card */
         .referral-card {
-            background: #111111;
-            border: 1px solid #222222;
+            background: #f5f5f7;
             border-radius: 28px;
             padding: 24px;
-            color: #ffffff;
+            color: #1d1d1f;
             margin-bottom: 20px;
         }
 
         .referral-title {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 6px;
-            color: #ffffff;
+            color: #1d1d1f;
         }
 
         .referral-desc {
-            color: #888888;
+            color: #86868b;
             font-size: 14px;
             margin-bottom: 20px;
+            font-weight: 400;
         }
 
         .referral-code-box {
-            background: #1a1a1a;
+            background: #ffffff;
             border-radius: 16px;
             padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            border: 1px solid #333333;
+            border: 1px solid #e8e8ed;
         }
 
         .referral-code {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 500;
             letter-spacing: 1px;
-            color: #ffffff;
+            color: #1d1d1f;
         }
 
         .copy-btn {
             background: transparent;
-            color: #ffffff;
-            border: 1px solid #444444;
+            color: #1d1d1f;
+            border: 1px solid #d2d2d7;
             padding: 8px 16px;
             border-radius: 30px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .copy-btn:active {
-            background: #ffffff;
-            color: #000000;
+            background: #1d1d1f;
+            color: #ffffff;
         }
 
         .referral-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 8px;
         }
 
         .ref-stat {
-            background: #1a1a1a;
+            background: #ffffff;
             border-radius: 20px;
             padding: 16px;
-            border: 1px solid #333333;
+            border: 1px solid #e8e8ed;
         }
 
         .ref-stat-value {
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 500;
             margin-bottom: 4px;
-            color: #ffffff;
+            color: #1d1d1f;
         }
 
         .ref-stat-label {
-            color: #888888;
+            color: #86868b;
             font-size: 13px;
+            font-weight: 400;
         }
 
         /* Profile */
@@ -376,63 +378,65 @@
         .avatar {
             width: 64px;
             height: 64px;
-            background: #1a1a1a;
+            background: #f5f5f7;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 26px;
-            font-weight: 600;
-            color: #ffffff;
-            border: 1px solid #333333;
+            font-weight: 400;
+            color: #1d1d1f;
+            border: 1px solid #e8e8ed;
         }
 
         .profile-info h2 {
             font-size: 20px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #1d1d1f;
         }
 
         .profile-info p {
-            color: #888888;
+            color: #86868b;
             font-size: 14px;
             margin-top: 4px;
+            font-weight: 400;
         }
 
         .profile-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 8px;
             margin-bottom: 24px;
         }
 
         .profile-stat-card {
-            background: #111111;
+            background: #f5f5f7;
             border-radius: 20px;
             padding: 16px;
             text-align: center;
-            border: 1px solid #222222;
         }
 
         .profile-stat-number {
             font-size: 22px;
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 500;
+            color: #1d1d1f;
         }
 
         .profile-stat-label {
-            color: #888888;
+            color: #86868b;
             font-size: 13px;
             margin-top: 4px;
+            font-weight: 400;
         }
 
         .menu-item {
             padding: 16px 0;
-            border-bottom: 1px solid #222222;
+            border-bottom: 1px solid #e8e8ed;
             display: flex;
             justify-content: space-between;
-            color: #ffffff;
+            color: #1d1d1f;
             font-size: 15px;
+            font-weight: 400;
             cursor: pointer;
         }
 
@@ -442,8 +446,7 @@
 
         /* Info */
         .info-card {
-            background: #111111;
-            border: 1px solid #222222;
+            background: #f5f5f7;
             border-radius: 24px;
             padding: 24px;
             margin-bottom: 16px;
@@ -451,8 +454,8 @@
 
         .info-card h3 {
             font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 500;
+            color: #1d1d1f;
             margin-bottom: 16px;
         }
 
@@ -462,15 +465,21 @@
 
         .info-list li {
             padding: 8px 0;
-            color: #cccccc;
+            color: #515154;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 400;
+            border-bottom: 1px solid #e8e8ed;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
         }
 
         .info-list li:before {
             content: "—";
-            color: #666666;
+            color: #c6c6c8;
             font-weight: 400;
         }
 
@@ -485,8 +494,8 @@
             display: flex;
             justify-content: space-around;
             padding: 12px 16px 20px;
-            background: #000000;
-            border-top: 1px solid #222222;
+            background: #ffffff;
+            border-top: 1px solid #e8e8ed;
             z-index: 100;
         }
 
@@ -512,20 +521,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
+            color: #1d1d1f;
         }
 
         .nav-label {
             font-size: 11px;
             font-weight: 400;
-            color: #888888;
+            color: #86868b;
         }
 
         .nav-item.active .nav-label {
-            color: #ffffff;
+            color: #1d1d1f;
         }
 
-        /* Icons - pure white */
+        /* Icons */
         .icon-poll, .icon-tasks, .icon-ref, .icon-profile, .icon-info {
             width: 22px;
             height: 22px;
@@ -539,19 +548,19 @@
         }
 
         .icon-poll {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E");
         }
         .icon-tasks {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E");
         }
         .icon-ref {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
         }
         .icon-profile {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
         }
         .icon-info {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='16' x2='12' y2='12'/%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='16' x2='12' y2='12'/%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'/%3E%3C/svg%3E");
         }
 
         /* Sections visibility */
@@ -561,22 +570,6 @@
 
         .section.active {
             display: block;
-        }
-
-        /* Selection style override */
-        .poll-option.selected {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .task-btn:active {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .copy-btn:active {
-            background: #ffffff;
-            color: #000000;
         }
     </style>
 </head>
@@ -817,9 +810,9 @@
             if (index >= polls.length) {
                 pollContainer.innerHTML = `
                     <div class="poll-content" style="text-align: center; padding: 40px 24px;">
-                        <div style="font-size: 40px; color: #ffffff; margin-bottom: 16px;">✓</div>
-                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #ffffff;">Все опросы пройдены</div>
-                        <div style="color: #888888; margin-bottom: 24px;">Новые появятся завтра</div>
+                        <div style="font-size: 40px; color: #1d1d1f; margin-bottom: 16px;">✓</div>
+                        <div style="font-size: 18px; font-weight: 400; margin-bottom: 8px; color: #1d1d1f;">Все опросы пройдены</div>
+                        <div style="color: #86868b; margin-bottom: 24px;">Новые появятся завтра</div>
                         <button class="task-btn" onclick="resetPolls()">Заново</button>
                     </div>
                 `;
